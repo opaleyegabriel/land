@@ -164,18 +164,24 @@ public function createaccount($data){
                     ));
                                         $result=$sql->fetch();
                                         $rows=$sql->rowCount();
+                                        if($row > 0 && $result['login_status']==1){
+                                            $message="User found  but account closed";
+                                              $found_status="No";
+                                              $dat=array('message'=>$message,'found_status'=>$found_status);
+                                              echo json_encode($dat);
+                                        }
+
+
+                                        
                                         if($rows > 0 && $result['login_status']==0){
-                                                        Session::set('loggedIn',true);
-                                                          Session::set('lphone',$data['lphone']);
+                                            Session::set('loggedIn',true);
+                                            Session::set('lphone',$data['lphone']);
 
                                           //  Session::set('cooperative',$_POST['cooperative']);
                                             $message="User successfully found";
                                             $found_status="Yes";
                                             $dat=array('message'=>$message,'found_status'=>$found_status);
                                             echo json_encode($dat);
-
-
-
                                           //  header('location: '. URL . 'dashboard');
 
                                           }
@@ -185,6 +191,7 @@ public function createaccount($data){
                                               $dat=array('message'=>$message,'found_status'=>$found_status);
                                               echo json_encode($dat);
                                             }
+                                            
 
                                   }
 

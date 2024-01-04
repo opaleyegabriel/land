@@ -9,6 +9,8 @@ session::init();
         }else
         {
           session::destroy();
+          header('location: '. URL . 'index');
+
         }
 
 ;?>
