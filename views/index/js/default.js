@@ -71,11 +71,19 @@ $(document).ready(function(){
                         var myresponse=(data.found_status);
                         if (lpassword=="") {}
                           else if(myresponse=="No"){
-                   $('#lpassword').val("");
-                   setTimeout(function(){
-                        $(".jqueryresponse4").css("display","block" ).delay(9000).fadeOut('1000');
-                       },);
-                         }
+                                 $('#lpassword').val("");
+                                 setTimeout(function(){
+                                            $('#jqueryresponse4').html("<strong style='color: #0FA015'>" + data.message + "</strong>");
+                                            $(".jqueryresponse4").css("display","block" ).delay(9000).fadeOut('1000');
+                                          },);
+                                 }
+                          else if(myresponse=="Not"){
+                                $('#lpassword').val("");
+                                setTimeout(function(){
+                                     $('#jqueryresponse5').html("<strong style='color: #0FA015'>" + data.message + "</strong>");
+                                    $(".jqueryresponse5").css("display","block" ).delay(9000).fadeOut('1000');
+                                 },);
+                              }
           },'json');
 
           });

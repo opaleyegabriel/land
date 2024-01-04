@@ -35,7 +35,10 @@ session::init();
                   Phone Number does not exist
                 </div>
                 <div class="jqueryresponse4">
-                  Incorrect Password/account closed
+                  Incorrect Password or Account Closed
+                </div>
+                 <div class="jqueryresponse5" style="display: none;">
+                  Account Closed
                 </div>
 <?php                /** <form enctype="multipart/form-data" action="<?php URL ;?> index/createaccount" method="post" class="p-6 space-y-4 relative bg-white shadow-lg rounded-lg">**/ ?>
                     <input type="Number" placeholder="Phone Number" name="lphone" id="lphone" class="with-border">

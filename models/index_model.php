@@ -166,7 +166,7 @@ public function createaccount($data){
                                         $rows=$sql->rowCount();
                                         if($row > 0 && $result['login_status']==1){
                                             $message="User found  but account closed";
-                                              $found_status="No";
+                                              $found_status="Not";
                                               $dat=array('message'=>$message,'found_status'=>$found_status);
                                               echo json_encode($dat);
                                         }
