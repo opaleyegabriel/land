@@ -16,8 +16,7 @@ class Billings extends Controller{
 
         }
     function index(){    
-        $this->view->allmyproducts=$this->model->allmyproducts();              
-        
+        $this->view->allmyproducts=$this->model->allmyproducts();
         $this->view->render('billings/index');
     }
     

@@ -13,6 +13,33 @@ class Hoogpay2_model extends Model {
     }
 
 
+    public function prepaymentsearch($data){
+      $cname="%".$data['sentfrom']."%";
+      $sth=$this->db->prepare("SELECT * FROM tbl_prepayment WHERE clientname like :cname AND amount=:amt AND usedstatus=:used");
+      $sth->execute(array(
+        ':cname'=>$cname,
+        ':amt'=>$data['amount'],
+        ':used'=>'N'
+        ));
+      $result=$sth->fetch();
+      if($result > 0){
+
+            $message="Payment Approved";
+             $s_status="Yes";
+
+             $d=array('message'=>$message,'s_status'=>$s_status);
+
+             echo json_encode($d); 
+      }else
+      {
+              $message="Payment not approved, please try to use First name only and the same amount sent!";
+             $s_status="No";
+
+             $d=array('message'=>$message,'s_status'=>$s_status);
+
+             echo json_encode($d); 
+      }
+    }
 
     public function getorders(){
 
@@ -250,9 +277,23 @@ class Hoogpay2_model extends Model {
 
             ':accessed'=>'N',
 
-            ':pstatus'=>''            
+            ':pstatus'=>'Y'            
 
             ));
+
+
+        //update prepayment table
+        $cname="%".$data['sentfrom']."%";
+        $sthUpdate=$this->db->prepare("UPDATE tbl_prepayment SET usedstatus='Y',usedby=:mobile WHERE clientname like :cname AND amount=:amt AND usedstatus=:used");
+        $sthUpdate->execute(array(
+        ':cname'=>$cname,
+        ':amt'=>$data['amount'],
+        ':used'=>'N',
+        ':mobile'=>Session::get('lphone')
+        ));
+              
+      // end it here
+
 
 
 

@@ -27,13 +27,13 @@ class Addallws_model extends Model {
 			 
 			    	echo '<script type="text/javascript">';
 			            echo 'alert("Allowance successfully Added");
-			            window.location.href = "'.URL.'addallws";';
+			            window.location.href = "'.URL.'prepay";';
 			          echo "</script>";
 
     	}else{
     		echo '<script type="text/javascript">';
 			            echo 'alert("No such user found!");
-			            window.location.href = "'.URL.'addallws";';
+			            window.location.href = "'.URL.'prepay";';
 			          echo "</script>";
 
     	}
