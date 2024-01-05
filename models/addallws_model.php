@@ -8,6 +8,7 @@ class Addallws_model extends Model {
 
         parent::__construct();
         session::init();
+        
 
     }
 
