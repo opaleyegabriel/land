@@ -10,7 +10,11 @@ class Prepay_model extends Model {
         session::init();
 
     }
-
+    public function unapprovedlist(){
+         $sth=$this->db->prepare("SELECT * FROM tbl_prepayment WHERE usedstatus='N'");
+        $sth->execute();
+        return $sth->fetchAll();
+    }
     public function add($data){
         $cname="%". $data['cname']."%";
         $s=$this->db->prepare("SELECT * FROM tbl_prepayment WHERE clientname like :cname AND amount=:amt AND usedstatus= :n");

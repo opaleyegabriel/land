@@ -203,6 +203,19 @@ session::init();
 
                     ?>              
 
+                     <?php
+                    if(Session::get('usertype')==1){
+                        echo '
+                        <li><a href="'.URL."appayment".'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
+                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg> <span> List of Approved Payment</span> </a>
+                    </li>
+                        ';
+                    }
+
+                    ?>             
 
 
 
@@ -227,12 +240,7 @@ session::init();
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
 
-                        <div class="card-media h-28" id="demodiv"><p id="demo"></p></div>         
-
-
-                            
-                     
-                     
+                      
                       <h2 class="text-xl font-semibold mt-7"> Add Unapproved Paymeents </h2>
                       <div class="card">
                       <form enctype="multipart/form-data" action="<?php echo URL."prepay/add" ?>" method="post" >                       
@@ -260,10 +268,39 @@ session::init();
                     </div>
 
                 </div>
+                <table>
+                    <thead>
+                <tr>
+                    <td>Sn</td>
+                    <td>Client Name</td>
+                    <td>Amount</td>
+                    <td>Approved</td>                  
+                    <td>Date Generated</td>
+                </tr>
+                </thead>
+            <tbody>
+            </tbody>
+                <?php
+                    //print_r($this->paymentlist);
+                $sn=1;
+                $n="NO";
+                foreach ($this->paymentlist as $key => $value) {
+                    # code...
+                    echo'
+                        <tr>
+                            <td>'. $sn .'</td>
+                            <td>'. $value["clientname"] .'</td>
+                            <td> =N= '. number_format($value["amount"]) .'</td>
+                            <td> '. $n .'</td>
+                            <td>'. $value["created_at"] .'</td>
+                        </tr>
 
 
-
-
+                    ';
+                }
+                ?>
+           </table>
+                 
 
             </div>
         </div>

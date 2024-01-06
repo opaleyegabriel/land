@@ -23,7 +23,8 @@ class Prepay extends Controller{
                 
 
        		 }
-              function index(){                   
+              function index(){     
+                $this->view->paymentlist=$this->model->unapprovedlist();              
                   $this->view->render('prepay/index');
 
             }

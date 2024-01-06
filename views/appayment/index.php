@@ -12,7 +12,7 @@ session::init();
     print_r($checkforunsettledpayments);
     exit();
     
-	//this is for list of posts
+    //this is for list of posts
     $msgDisplay=($d->DisplayMsgList());
     //this is for post counts
     $msgDisplaycount=($d->DisplayMsgCount());
@@ -203,6 +203,19 @@ session::init();
 
                     ?>              
 
+                     <?php
+                    if(Session::get('usertype')==1){
+                        echo '
+                        <li><a href="'.URL."appayment".'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
+                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg> <span> List of Approved Payment</span> </a>
+                    </li>
+                        ';
+                    }
+
+                    ?>             
 
 
 
@@ -215,25 +228,66 @@ session::init();
 
         <!-- Main Contents -->
         <div class="main_content">
-            <div><h1>List of unApproved Payments</h1></div>
-           <table>
-            <thead>
+            <div class="mcontainer">
+
+
+
+
+
+
+
+                <div class="lg:flex lg:space-x-12">
+
+                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
+
+                      
+                      <h2 class="text-xl font-semibold mt-7"> List of Approved Payments </h2>
+                      
+                    </div>
+
+                </div>
+                <table class="table table-striped table-dark">
+                    <thead>
                 <tr>
-                    <td>Sn</td>
-                    <td>Client Name</td>
-                    <td>Amount</td>
-                    <td>Approved</td>
-                    <td>Approved for</td>
-                    <td>With Mobile</td>
-                    <td>Date Generated</td>
+                    <td>s/n</td>
+                    <td scope="col" align="center">Client Name</td>
+                    <td scope="col" align="center">Amount</td>
+                    <td scope="col" align="center">Approved</td>                  
+                    <td scope="col" align="center">Approved for</td>
+                    <td scope="col" align="center">Mobile</td>  
+                    <td scope="col" align="center">Date Generated</td>
                 </tr>
-            </thead>
+                </thead>
             <tbody>
             </tbody>
                 <?php
-                    print_r($this->unapprovedlist);
+                  //  print_r($this->paymentlist);
+                
+                $sn=1;
+                $n="YES";
+                foreach ($this->paymentlist as $key => $value) {
+                    # code...
+                    echo'
+                        <tr>
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" >'. $value["clientname"] .'</td>
+                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="right"> '. $n .'</td>
+                            <td scope="col" align="left"> '. $value["name"] .'</td>
+                            <td scope="col" align="left"> '. $value["usedby"] .'</td>
+                            <td scope="col" align="right"> '. $value["created_at"] .'</td>
+                        </tr>
+
+
+                    ';
+                    $sn++;
+                }
+                
                 ?>
            </table>
+                 
+
+            </div>
         </div>
     </div>
 
@@ -268,6 +322,11 @@ var x = setInterval(function() {
   }
 }, 1000);
 </script>
+
+
+
+
+
 
 
 
