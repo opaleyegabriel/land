@@ -22,7 +22,7 @@ class Admlogin_model extends Model {
     		session::set('currentuser',$data['username']);
             session::set("adminuser", true);          
             session::set("usertype", $result['usertype']); 
- 		
+            session::set("branch", $result['branch']); 		
     	}
         
     }

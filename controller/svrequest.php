@@ -4,6 +4,15 @@ class Svrequest extends Controller{
             {
                 parent::__construct();
                 Session::init();
+                 $this->view->js=array('sendsmsdetails/js/default.js');
+                $logged=Session::get('adminuser');
+                $usertype=Session::get('usertype');
+                if ($logged==false)
+                {
+                    Session::destroy();
+                    header('location: '. URL . 'admlogin');
+                    exit;
+                }
         }
 
 

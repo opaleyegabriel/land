@@ -260,10 +260,12 @@ session::init();
                       <form enctype="multipart/form-data" action="<?php echo URL."svrequest/newrequest" ?>" method="post" >                       
                           <div class="card-body">                                      
                             
-                                <input type="text" name="requestby" value="" class="with-border"  placeholder="Request By" required> 
+                                <input type="text" name="requestby" value="" class="with-border" value="<?php echo Session:get('currentuser') ?>"  placeholder="Request By" required readOnly> 
                                 <input type="text" name="site" value="" class="with-border"  placeholder="Visit" required> 
                                 <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
-                                <input type="text" name="amount" value="" class="with-border"  placeholder="transport" required>
+                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
+                                <input type="text" name="branch" value="" class="with-border"  value="<?php echo Session::get('branch') ?>" required readOnly>
+
 
                                 <input type="submit" value="Request Now">
                                 
