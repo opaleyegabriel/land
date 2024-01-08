@@ -1,4 +1,5 @@
-<?php
+           
+ <?php
 session::init();
 
 ?>
@@ -201,10 +202,27 @@ session::init();
 
         <!-- Main Contents -->
         <div class="main_content">
-            <?php
-                    echo "<pre>";
-                    print_r($this->getapprovallist);
+            <div class="mcontainer">
 
+
+
+
+
+
+
+                <div class="lg:flex lg:space-x-12">
+
+                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
+                      
+                    </div>
+
+                </div>
+                <h2 class="text-xl font-semibold mt-7"> Site Visit Request Approval</h2>
+                 <?php
+                   // echo "<pre>";
+                    //print_r($this->getapprovallist);
+                    $result=$this->getapprovallist;
+                    /*
                     foreach ($this->getapprovallist as $key => $value) {
                         $requestby=$value['requestby'];
                         $site=$value['site'];
@@ -213,70 +231,29 @@ session::init();
                     }
 
 
+                    */
+               
+              echo  ' <form method="POST" enctype="multipart/form-data" action="' . URL . 'apsitevisit/effectsiteapproval">
+                        <input type="text" value="'. $result["requestby"].'" readOnly name="requestby" >
+                        <input type="text" value="'.$result["site"].'" readOnly name="site" >
+                        <input type="text" value="'.$result["purpose"].'" readOnly name="purpose" >
+                        <input type="number" value="'.$result["amount"].'" name="amount" >
+                        <input type="hidden" value="'.$result["id"].'" name="id">
+                        <select name="decision">
+                          <option value="APPROVED">Aprrove</option>
+                          <option value="DECLINE">Decline</option>                          
+                        </select>
+                        <input type="text" placeholder="Approval comments" name="comment">
 
-                ?>
-                <table>
-                    <tr>
-                        <td>Data</td>
-                        <td>Data</td>
-                        <td>Data</td>
-                    </tr>
-                </table>
-                <form  method="post" enctype="multipart/form-data" action="<?php echo URL ;?>apsitevisit/apporreject">
-                    
-                                <input type="text" name="requestby" value="" class="with-border" value="<?php echo $requestby; ?>" required readOnly> 
-                                <input type="text" name="site" value="" class="with-border"  value="<?php echo $site; ?>" required readOnly> 
-                                <input type="text" name="purpose" value="" class="with-border"  value="<?php echo $purpose ;?>" required readOnly> 
-                                <input type="Number" name="amount" value="" class="with-border"  value="<?php echo $amount;?>" required> 
-                                <select name="response" class="with-border">
-                                  <option value="APPROVED">Approve</option>
-                                  <option value="REJECT">Reject</option>                                  
-                                </select> 
-                                <input type="submit" value="Effect Changes">                               
+                        <input type="submit" value="Effect Now">
 
-                  </form>
+                    </form>';
+                
+             ?>
+                 
+
+            </div>
         </div>
     </div>
-
-
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("July 16, 2022 00:00:00").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
-
-
-
-
-
-
-
-
-
 
 

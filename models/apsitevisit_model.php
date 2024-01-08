@@ -29,5 +29,14 @@ class Apsitevisit_model extends Model {
     		));
     	return $sth->fetch();
     }
+    public function effectsiteapproval($data){
+        $sth=$this->db->prepare("UPDATE tbl_sitevisit SET amount=:amount,comment=:comment,vstatus=:vstatus WHERE id=:id ");
+        $sth->execute(array(
+            ':amount'=>$data["amount"],
+            ':comment'=>$data["comment"],
+            ':vstatus'=>$data["decision"],
+            ':id'=>$data["id"]
+            ));        
+    }
 
 }
