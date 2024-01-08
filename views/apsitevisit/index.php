@@ -1,36 +1,6 @@
 <?php
 session::init();
-$currentuser=session::get("currentuser");
-$branch=session::get("branch");
-//print($currentuser);
-//exit();
-/*
-    require_once  ('models/dashboard_model.php');
-    $d= new Dashboard_Model();
-    $allmyproducts=($d->all_ind_products());
-    $allitems=($d->allitems());
-    
-    
-    echo "<pre>";
-    print_r($checkforunsettledpayments);
-    exit();
-    
-	//this is for list of posts
-    $msgDisplay=($d->DisplayMsgList());
-    //this is for post counts
-    $msgDisplaycount=($d->DisplayMsgCount());
-    $tharraycount=count($msgDisplaycount);
-    //this is for daily bet prediction
-    $freebet=($d->GetTodayPrediction());
-    //This is for advert
-    $advert=($d->SelectRandonSpecialAdvert());
-     
-     echo "<pre>";
-    print_r($this->checkforunsettledpayments);
-    exit();
-   */
-    
-    
+
 ?>
 
 
@@ -76,7 +46,7 @@ $branch=session::get("branch");
                                         <img src="<?php echo URL; ?>public/images/pimage.png" alt="">
                                     </div>
                                     <div class="user_name">
-                                        <div> <?php echo Session::get("currentuser");?> </div>
+                                        <div> <?php echo Session::get("name");?> </div>
                                         <span> <?php echo Session::get("lphone");?></span>
                                     </div>
                                 </a>
@@ -221,20 +191,6 @@ $branch=session::get("branch");
                     ?>             
 
 
-                    <?php
-                    if(Session::get('usertype')==0){
-                        echo '
-                        <li><a href="'.URL."svrequest".'">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
-                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                        </svg> <span> Site Visit Request</span> </a>
-                    </li>
-                        ';
-                    }
-
-                    ?>     
-
 
             </div>
 
@@ -256,73 +212,57 @@ $branch=session::get("branch");
                 <div class="lg:flex lg:space-x-12">
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
-
                       
-                      <h2 class="text-xl font-semibold mt-7"> Site Visit Request </h2>
-                      <div class="card">
-                      <form enctype="multipart/form-data" action="<?php echo URL."svrequest/newrequest" ?>" method="post" >                       
-                          <div class="card-body">                                      
-                            
-                                
-                                <input type="text" name="site" value="" class="with-border"  placeholder="Visit" required> 
-                                <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
-                                <input type="submit" value="Request Now">
-                                
-
-                          </div></form>
-
-
-
-                          </div>
-
-         
-
-
-
-                       
-                      
-
                     </div>
 
                 </div>
-                 <h2 class="text-xl font-semibold mt-7"> List of Sites Visit Pending Request </h2>
-                <table class="table table-striped table-dark">
+                <h2 class="text-xl font-semibold mt-7"> List of Sites Visit Request </h2>
+                <table>
                     <thead>
                 <tr>
                     <td>s/n</td>
-                    
-                    <td scope="col" align="center">Site</td>                    
+                    <td scope="col" align="center">Request By</td>
+                    <td scope="col" align="center">Site</td>
+                    <td scope="col" align="center">Branch</td>                  
                     <td scope="col" align="center">Amount</td>
-                    <td scope="col" align="center">Status</td>                      
-                    <td scope="col" align="center">Feedback</td>                      
+                    <td scope="col" align="center">Check</td>                      
                 </tr>
                 </thead>
             <tbody>
             </tbody>
                 <?php
                   //  print_r($this->paymentlist);
-                /*
+                function Branch(int $a){
+                    if($a==1){
+                        return 'Ilorin';
+                    }elseif ($a==2) {
+                        return 'Osogbo';
+                    }elseif ($a==3) {
+                        return 'Ibadan';
+                    }
+                }
                 $sn=1;
-                $n="YES";
-                foreach ($this->paymentlist as $key => $value) {
+                
+                foreach ($this->listofsitevisit2approve as $key => $value) {
                     # code...
+                    $branch=Branch($value['branch']);
                     echo'
                         <tr>
                             <td scope="col" align="left">'. $sn .'</td>
-                            <td scope="col" >'. $value["clientname"] .'</td>
-                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                            <td scope="col" align="right"> '. $n .'</td>
-                            <td scope="col" align="left"> '. $value["name"] .'</td>
-                            <td scope="col" align="left"> '. $value["usedby"] .'</td>
-                            <td scope="col" align="right"> '. $value["created_at"] .'</td>
+                            <td scope="col" >'. $value["requestby"] .'</td>
+                            <td scope="col" >'. $value['site'] .'</td>
+                            <td scope="col" > '. $branch.'</td>
+                            <td scope="col" align="right"> =N='. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="left"> Check</td>
+                            <td><a href='. URL ."apsitevisit/approvesitevisit/". $value["id"] .'>approve</a></td>;
+                            
                         </tr>
 
 
                     ';
                     $sn++;
                 }
-                */
+                
                 ?>
            </table>
                  

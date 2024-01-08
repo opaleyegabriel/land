@@ -14,16 +14,25 @@ class Admlogin_model extends Model {
     		':p'=>$data['pwd']
     		));
     	$result= $sth->fetch();
-        //print_r($result);
+       // print_r($result);
         //exit();
     	
         if($result){
-            
-    		session::set('currentuser',$data['username']);
+           // echo "<pre>";
+            // print_r($result);
+             //exit();
+    		session::set('currentuser',$result['username']);
             session::set("adminuser", true);          
             session::set("usertype", $result['usertype']); 
-            session::set("branch", $result['branch']); 		
-    	}
+            session::set("branch", $result['branch']); 	
+            //print (session::get("currentuser"));
+            //exit();
+            //
+           
+    	}else{
+           header('location: '. URL . 'admlogin');  
+        }
+        
         
     }
     

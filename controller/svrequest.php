@@ -23,6 +23,19 @@ class Svrequest extends Controller{
        // $this->view->paymentlist=$this->model->approvedlist();
         $this->view->render('svrequest/index');
     }
+
+    public function newrequest(){
+        $data=array();
+        $data['site']=$_POST['site'];
+        $data['purpose']=$_POST['purpose'];
+        $data['amount']=$_POST['amount'];
+        $data['requestby']=Session::get("currentuser");
+        $data['branch']=session::get("branch");
+        //echo "<pre>";
+        //print_r($data);
+        $this->model->newrequest($data);
+
+    }
     
     
     

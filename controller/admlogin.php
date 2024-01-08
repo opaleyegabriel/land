@@ -21,7 +21,7 @@ class Admlogin extends Controller{
         //echo "<pre>";
         //print_r($data);
         $this->model->myadmlogin($data);
-         //header('location: '. URL . 'admdashboard');
+         
         $this->view->render('admdashboard/index');
     }
     
