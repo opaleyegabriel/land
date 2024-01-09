@@ -1,6 +1,9 @@
 <?php
 session::init();
-
+$currentuser=session::get("currentuser");
+$branch=session::get("branch");
+//print($currentuser);
+//exit();
 /*
     require_once  ('models/dashboard_model.php');
     $d= new Dashboard_Model();
@@ -73,7 +76,7 @@ session::init();
                                         <img src="<?php echo URL; ?>public/images/pimage.png" alt="">
                                     </div>
                                     <div class="user_name">
-                                        <div> <?php echo Session::get("name");?> </div>
+                                        <div> <?php echo Session::get("currentuser");?> </div>
                                         <span> <?php echo Session::get("lphone");?></span>
                                     </div>
                                 </a>
@@ -93,7 +96,7 @@ session::init();
                                         <span class="uk-switch-button"></span>
                                     </span>
                                 </a>
-                                <a href="<?php echo URL."ctarget/logout"; ?>">
+                                <a href="<?php echo URL."admdashboard/logout"; ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                     </svg>
@@ -358,49 +361,34 @@ session::init();
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
 
-                        <div class="card-media h-28" id="demodiv">Final Opportunity on Peace City and New Town Estate FESTIVE PROMO ends in <p id="demo"></p></div>
-                        
-
-
-                            
-                     
-                     
-                      <h2 class="text-xl font-semibold mt-7"> BAs Targets  </h2>
+                      
+                      <h2 class="text-xl font-semibold mt-7"> Create Imprest </h2>
                       <div class="card">
-                      <?php
-                      if(session::get("duplicate")){
-                       echo '<h2 class="text-xl font-semibold mt-7"> Duplicate record exist  </h2>';
-                        session::set("duplicate",false);
-                      }
-                      if(session::get("saved")){
-                        echo '<h2 class="text-xl font-semibold mt-7"> Record successfully Saved  </h2>';
-                        session::set("saved",false);
-                      }
-                      if(session::get("clientnotexist")){
-                        echo '<h2 class="text-xl font-semibold mt-7"> Client Not Exist </h2>';
-                        session::set("clientnotexist",false);
-                      }
-                      if(session::get("BAnotexist")){
-                        echo '<h2 class="text-xl font-semibold mt-7">BA not exist </h2>';
-                        session::set("BAnotexist",false);
-                      }
-                      
-                      
-                      
-                      
-                      
-                      ?>
-                      <form enctype="multipart/form-data" action="<?php echo URL."ctarget/createtarget" ?>" method="post" >                       
-                          <div class="card-body">                                     
+                      <form enctype="multipart/form-data" action="<?php echo URL."createimprest/new" ?>" method="post" >                      
+                          <div class="card-body">                                      
                             
-                                
-                                
-                                <input type="text" name="mobile" value="" class="with-border"  placeholder="BAs Mobile Number" required>                                
-                                <input type="text" name="cmobile" value="" class="with-border"  placeholder="Client Mobile Number" required>
-                                <input type="submit" value="Create Account">
+                                <select name="staff" id="staff-list" onchange="getBranch(this.value)" >
+                        <option value disabled selected>Select a Staff</option>
+                        <?php
+                        foreach($this->GetStaff as $staff) {
+                            ?>
+                            <option value="<?php echo $staff["branch"]; ?>"><?php echo $staff["username"]; ?></option>
+                        <?php                                }
+                        ?>
+                        </select>
+
+                        
+                                </select>
+                                <input type="text" name="branch" value="" class="with-border"   required> 
+                                <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
+                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
+                                <input type="submit" value="New Imprest">
                                 
 
-                          </div></form>
+                          </div>
+
+
+                          </form>
 
 
 
@@ -416,100 +404,85 @@ session::init();
                     </div>
 
                 </div>
+                 <h2 class="text-xl font-semibold mt-7"> List of Sites Visit Pending Request </h2>
+                <table class="table table-striped table-dark">
+                    <thead>
+                <tr>
+                    <td>s/n</td>
+                    
+                    <td scope="col" align="center">Site</td>                    
+                    <td scope="col" align="center">Amount</td>
+                    <td scope="col" align="center">Status</td>                      
+                    <td scope="col" align="center">Feedback</td>                      
+                </tr>
+                </thead>
+            <tbody>
+            </tbody>
+                <?php
+                  //  print_r($this->paymentlist);
+                /*
+                $sn=1;
+                $n="YES";
+                foreach ($this->paymentlist as $key => $value) {
+                    # code...
+                    echo'
+                        <tr>
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" >'. $value["clientname"] .'</td>
+                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="right"> '. $n .'</td>
+                            <td scope="col" align="left"> '. $value["name"] .'</td>
+                            <td scope="col" align="left"> '. $value["usedby"] .'</td>
+                            <td scope="col" align="right"> '. $value["created_at"] .'</td>
+                        </tr>
 
 
-
-
+                    ';
+                    $sn++;
+                }
+                */
+                ?>
+           </table>
+                 
 
             </div>
         </div>
     </div>
 
 
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("July 16, 2022 00:00:00").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
 
 
+
+                            <script>
+                                function getBranch(val) {
+                                  // return  console.log('selected', val);
+                                    var staff = document.getElementById("staff").value;
+                                   // alert(myname);
+                                   function getbranch(int id){
+                                        if(staff==1){
+                                            Branch="Ilorin";                                    
+                                        }
+                                        if(staff==2){
+                                            Branch="Osogbo";                                    
+                                        }
+                                        if(staff==3){
+                                            Branch="Ibadan";                                    
+                                        }
+                                    
+                                   }
+
+
+                                            // We get the element having id of display_info and put the response inside it
+                                            $( '#branch' ).html(response);
+                                      
+
+
+                                
+                                }
+                            </script>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- For Night mode -->
-    <script>
-        (function (window, document, undefined) {
-            'use strict';
-            if (!('localStorage' in window)) return;
-            var nightMode = localStorage.getItem('gmtNightMode');
-            if (nightMode) {
-                document.documentElement.className += ' night-mode';
-            }
-        })(window, document);
-
-        (function (window, document, undefined) {
-
-            'use strict';
-
-            // Feature test
-            if (!('localStorage' in window)) return;
-
-            // Get our newly insert toggle
-            var nightMode = document.querySelector('#night-mode');
-            if (!nightMode) return;
-
-            // When clicked, toggle night mode on or off
-            nightMode.addEventListener('click', function (event) {
-                event.preventDefault();
-                document.documentElement.classList.toggle('dark');
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('gmtNightMode', true);
-                    return;
-                }
-                localStorage.removeItem('gmtNightMode');
-            }, false);
-
-        })(window, document);
-    </script>
