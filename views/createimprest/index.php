@@ -379,8 +379,8 @@ $branch=session::get("branch");
 
                         
                                 </select>
-                                <input type="text" name="branch" value="" class="with-border"   required> 
-                                <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
+                                
+                                <input type="text" name="description" value="" class="with-border"  placeholder="Being Imprest " required> 
                                 <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
                                 <input type="submit" value="New Imprest">
                                 
@@ -404,43 +404,43 @@ $branch=session::get("branch");
                     </div>
 
                 </div>
-                 <h2 class="text-xl font-semibold mt-7"> List of Sites Visit Pending Request </h2>
+                 <h2 class="text-xl font-semibold mt-7"> List of Unclosed Imprest Vouchers </h2>
                 <table class="table table-striped table-dark">
                     <thead>
                 <tr>
-                    <td>s/n</td>
                     
-                    <td scope="col" align="center">Site</td>                    
-                    <td scope="col" align="center">Amount</td>
-                    <td scope="col" align="center">Status</td>                      
-                    <td scope="col" align="center">Feedback</td>                      
+                    
+                    <td scope="col" align="center">Serial No</td>                    
+                    <td scope="col" align="center">Date Disbursed</td>
+                    <td scope="col" align="center">Amount</td>                      
+                    <td scope="col" align="center"> View </td>                      
+                    <td scope="col" align="center"> Close </td> 
                 </tr>
                 </thead>
             <tbody>
             </tbody>
                 <?php
-                  //  print_r($this->paymentlist);
-                /*
+                 //   print_r($this->unclosedimprestvouchers);
+                
                 $sn=1;
-                $n="YES";
-                foreach ($this->paymentlist as $key => $value) {
+                //$n="YES";
+                echo date_format($date,"Y/m/d H:i:s");
+                foreach ($this->unclosedimprestvouchers as $key => $value) {
                     # code...
                     echo'
                         <tr>
-                            <td scope="col" align="left">'. $sn .'</td>
-                            <td scope="col" >'. $value["clientname"] .'</td>
+                           <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" >'. $value["created_at"] .'</td>
                             <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                            <td scope="col" align="right"> '. $n .'</td>
-                            <td scope="col" align="left"> '. $value["name"] .'</td>
-                            <td scope="col" align="left"> '. $value["usedby"] .'</td>
-                            <td scope="col" align="right"> '. $value["created_at"] .'</td>
+                            <td scope="col" align="right"> View </td>
+                            <td scope="col" align="right"> Close </td>                           
                         </tr>
 
 
                     ';
                     $sn++;
                 }
-                */
+                
                 ?>
            </table>
                  
@@ -448,40 +448,6 @@ $branch=session::get("branch");
             </div>
         </div>
     </div>
-
-
-
-
-
-                            <script>
-                                function getBranch(val) {
-                                  // return  console.log('selected', val);
-                                    var staff = document.getElementById("staff").value;
-                                   // alert(myname);
-                                   function getbranch(int id){
-                                        if(staff==1){
-                                            Branch="Ilorin";                                    
-                                        }
-                                        if(staff==2){
-                                            Branch="Osogbo";                                    
-                                        }
-                                        if(staff==3){
-                                            Branch="Ibadan";                                    
-                                        }
-                                    
-                                   }
-
-
-                                            // We get the element having id of display_info and put the response inside it
-                                            $( '#branch' ).html(response);
-                                      
-
-
-                                
-                                }
-                            </script>
-
-
 
 
 
