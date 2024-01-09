@@ -361,7 +361,16 @@ $branch=session::get("branch");
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
 
-                      
+                      <table>
+                        <tr>
+                            <td><input type="button" value="Create Imprest" id="createimp"></td>
+                            <td><input type="button" value="Initiate Expenses" id="expint"></td>
+                            <td><input type="button" value="Initiate Retire" id="impressretire"></td>
+                        </tr>
+                        
+                        
+                      </table>
+
                       <h2 class="text-xl font-semibold mt-7"> Create Imprest </h2>
                       <div class="card">
                       <form enctype="multipart/form-data" action="<?php echo URL."createimprest/new" ?>" method="post" >                      
@@ -381,7 +390,7 @@ $branch=session::get("branch");
                                 </select>
                                 
                                 <input type="text" name="description" value="" class="with-border"  placeholder="Being Imprest " required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
+                                <input type="Number" name="amount" value="" class="with-border"  placeholder="Imprest  Amount" required>
                                 <input type="submit" value="New Imprest">
                                 
 
@@ -424,16 +433,17 @@ $branch=session::get("branch");
                 
                 $sn=1;
                 //$n="YES";
-                echo date_format($date,"Y/m/d H:i:s");
+                //echo date_format($date,"Y/m/d H:i:s");
                 foreach ($this->unclosedimprestvouchers as $key => $value) {
                     # code...
                     echo'
                         <tr>
                            <td scope="col" align="left">'. $sn .'</td>
-                            <td scope="col" >'. $value["created_at"] .'</td>
+                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
                             <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                            <td scope="col" align="right"> View </td>
-                            <td scope="col" align="right"> Close </td>                           
+                            <td scope="col" align="center"><a href='. URL ."createimprest/viewtransactions/". $value["id"] .'><input type="button" value="View"></a> </td>
+                            <td scope="col" align="center"> <a href='. URL ."createimprest/closeimprest/". $value["id"] .'><input type="button" value="Close"></a>  </td>  
+                                                     
                         </tr>
 
 

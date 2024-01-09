@@ -24,4 +24,10 @@ class Createimprest extends Controller{
         header('location: '. URL . 'createimprest');
         
     }
+    public function viewtransactions($id){
+        echo $id;
+    }
+    public function closeimprest($id){
+        echo $id;
+    }
 }
