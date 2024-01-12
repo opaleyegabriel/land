@@ -25,10 +25,12 @@ class Apsitevisit extends Controller{
               $data['decision']=$_POST['decision'];
               $data['comment']=$_POST['comment'];
               $data['id']=$_POST['id'];
-              //echo "<pre>";
-              //print_r($data);
-              $this->model->effectsiteapproval($data);
-              $this->view->render('apsitevisit/checkdetails');
+              $data['branchid']=$_POST['branchid'];
+              $data['requestby']=$_POST['requestby'];
+              echo "<pre>";
+              print_r($data);
+              //$this->model->effectsiteapproval($data);
+              //$this->view->render('apsitevisit/checkdetails');
 
             }
 }

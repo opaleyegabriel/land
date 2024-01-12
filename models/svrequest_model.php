@@ -10,6 +10,15 @@ class Svrequest_model extends Model {
         session::init();
 
     }
+	public function requestlist(){
+		$rb="%".session::get('currentuser');
+		$sth=$this->db->prepare("SELECT * FROM tbl_sitevisit WHERE vstatus=:vst AND requestby LIKE :rqb");
+		$sth->execute(array(
+			':vst'=>'APPROVED',
+			':rqb'=>$rb
+		));
+		return $sth->fetchAll();
+	}
     public function newrequest($data){
     	$s=$this->db->prepare("SELECT * FROM tbl_sitevisit WHERE requestby=:requestby AND vstatus='N'");
     	$s->execute(array(

@@ -347,8 +347,6 @@ session::init();
                         $purpose=$value['purpose'];
                         $amount=$value['amount'];
                     }
-
-
                     */
                
               echo  ' <form method="POST" enctype="multipart/form-data" action="' . URL . 'apsitevisit/effectsiteapproval">
@@ -357,6 +355,7 @@ session::init();
                         <input type="text" value="'.$result["purpose"].'" readOnly name="purpose" >
                         <input type="number" value="'.$result["amount"].'" name="amount" >
                         <input type="hidden" value="'.$result["id"].'" name="id">
+                        <input type="text" value"'.$result["branch"].'" name="branchid">
                         <select name="decision">
                           <option value="APPROVED">Aprrove</option>
                           <option value="DECLINE">Decline</option>                          

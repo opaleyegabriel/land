@@ -37,6 +37,17 @@ class Apsitevisit_model extends Model {
             ':vstatus'=>$data["decision"],
             ':id'=>$data["id"]
             ));        
+
+            $descr="Being amount for site visit by  ".$data['requestby'];
+            //CREATE imprest directly
+            $s=$this->db->prepare("INSERT INTO tbl_imprest VALUES(:id,:bid,:descr,:amt,:ist) ");
+            $s->execute(array(
+                ':id'=>$data['id'],
+                ':bid'=>$data['branchid'],
+                ':descr'=>$descr,
+                ':amt'=>$data['amount'],
+                ':ist'=>'Paid'
+            ));
     }
 
 }

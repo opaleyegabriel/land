@@ -20,7 +20,7 @@ class Svrequest extends Controller{
 
 
     function index(){
-       // $this->view->paymentlist=$this->model->approvedlist();
+       $this->view->requestlist=$this->model->requestlist();
         $this->view->render('svrequest/index');
     }
 
