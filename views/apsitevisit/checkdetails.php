@@ -338,7 +338,8 @@ session::init();
                 <h2 class="text-xl font-semibold mt-7"> Site Visit Request Approval</h2>
                  <?php
                    // echo "<pre>";
-                    //print_r($this->getapprovallist);
+                    print_r($this->getapprovallist);
+                    
                     $result=$this->getapprovallist;
                     /*
                     foreach ($this->getapprovallist as $key => $value) {
