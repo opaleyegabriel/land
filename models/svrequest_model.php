@@ -19,6 +19,23 @@ class Svrequest_model extends Model {
 		));
 		return $sth->fetchAll();
 	}
+	public function selectedsitevisitrecords($id){
+		$sth=$this->db->prepare("SELECT * FROM tbl_sitevisit WHERE id=:id");
+		$sth->execute(array(
+			':id'=>$id
+		));
+		return $sth->fetch();
+	}
+
+	public function submitfeedback($data){
+		$sth=$this->db->prepare("UPDATE tbl_sitevisit SET pleased=:pls,client=:client,feedback=:feedback,vstatus=:vst WHERE id=:id");
+		$sth->execute(array(':pls'=>$data['pleased'],':client'=>$data['client'],':feedback'=>$data['feedback'],':vst'=>'Feedback',':id'=>$data['id']));
+		echo '<script type="text/javascript">';
+                        echo 'alert("Site Visitation Tracking completed!");
+                        window.location.href = "'.URL.'svrequest";';
+                      echo "</script>";
+	}
+
     public function newrequest($data){
     	$s=$this->db->prepare("SELECT * FROM tbl_sitevisit WHERE requestby=:requestby AND vstatus='N'");
     	$s->execute(array(

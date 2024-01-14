@@ -6,14 +6,20 @@ class Admdashboard extends Controller{
          parent::__construct();
         Session::init();
         
-        $this->view->js=array('admdashboard/js/default.js');
-        $logged=Session::get('adminuser');
-        if ($logged==false)
-        {
-            Session::destroy();
-            header('location: '. URL . 'admlogin');
-            exit;
-        }   
+                $this->view->js=array('admdashboard/js/default.js');
+                $logged=Session::get('adminuser');
+                $usertype=Session::get('usertype');
+                if ($logged==false)
+                {
+                    Session::destroy();
+                    header('location: '. URL . 'admlogin');
+                    exit;
+                }elseif ($usertype != 1) //super admin is 1 other admin is 0
+                {
+                    # code...
+                    header('location: '. URL . 'admdashboard');
+
+                }  
 
       }
         function index(){           

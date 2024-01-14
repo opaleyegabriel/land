@@ -372,40 +372,8 @@ $branch=session::get("branch");
 
 
 
-                <div class="lg:flex lg:space-x-12">
-
-                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
-
-                      
-                      <h2 class="text-xl font-semibold mt-7"> Site Visit Request </h2>
-                      <div class="card">
-                      <form enctype="multipart/form-data" action="<?php echo URL."svrequest/newrequest" ?>" method="post" >                       
-                          <div class="card-body">                                      
-                            
-                                
-                                <input type="text" name="site" value="" class="with-border"  placeholder="Visit" required> 
-                                <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
-                                <input type="submit" value="Request Now">
-                                
-
-                          </div></form>
-
-
-
-                          </div>
-
-         
-
-
-
-                       
-                      
-
-                    </div>
-
-                </div>
-                 <h2 class="text-xl font-semibold mt-7"> List of Site Visit Request </h2>
+               
+                 <h2 class="text-xl font-semibold mt-7"> List of Site Visits Untreated</h2>
                 <table class="table table-striped table-dark">
                     <thead>
                 <tr>
@@ -426,17 +394,32 @@ $branch=session::get("branch");
                 
                 foreach ($this->requestlist as $key => $value) {
                     # code...
-                    echo'
-                        <tr>
+                    if($value['vstatus']=="Feedback"){
+                        echo'
+                        <tr style="color:green">
                             <td scope="col" align="left">'. $sn .'</td>
                             <td scope="col" align="left">'. $value["site"] .'</td>
                             <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
                             <td scope="col" align="left">'. $value["vstatus"] .'</td>
-                            <td scope="col"><a href='. URL ."svrequest/feedback/". $value["id"] .'><input type="button" value="FeedBACK"></a></td>;
-                        </tr>
+                            <td scope="col"><a href='. URL ."svfeedback/feedback/". $value["id"] .'><input type="button" value="View"></a></td>;
+                        </tr>';
 
+                    }
+                    if($value['vstatus']=="APPROVED"){
+                        echo'
+                        <tr style="color:yellow">
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" align="left">'. $value["site"] .'</td>
+                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="left">'. $value["vstatus"] .'</td>
+                            <td scope="col"><a href='. URL ."svfeedback/query/". $value["id"] .'><input type="button" value="Send Query"></a></td>;
+                        </tr>';
 
-                    ';
+                    }
+                    
+                   
+
+                    
                     $sn++;
                 }
                 

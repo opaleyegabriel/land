@@ -36,7 +36,19 @@ class Svrequest extends Controller{
         $this->model->newrequest($data);
 
     }
-    
+    public function feedback($id){
+        $this->view->selectedsitevisitrecords=$this->model->selectedsitevisitrecords($id);
+        $this->view->render('svrequest/feedback');
+    }
+    public function submitfeedback(){
+        $data=array();
+        $data['id']=$_POST['id'];
+        $data['pleased']=$_POST['pleased'];
+        $data['client']=$_POST['client'];
+        $data['feedback']=$_POST['feedback'];
+        $this->model->submitfeedback($data);
+        $this->view->render('svrequest/index');
+    }
     
     
 }
