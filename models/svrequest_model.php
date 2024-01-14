@@ -31,7 +31,7 @@ class Svrequest_model extends Model {
                         window.location.href = "'.URL.'svrequest";';
                       echo "</script>";
     	}else{
-    		$sth=$this->db->prepare("INSERT INTO tbl_sitevisit (requestby,site,purpose,branch,amount,vstatus) VALUES(:requestby,:site,:purpose,:branch,:amount,:vstatus)");
+    		$sth=$this->db->prepare("INSERT INTO tbl_sitevisit (requestby,site,purpose,branchid,amount,vstatus) VALUES(:requestby,:site,:purpose,:branch,:amount,:vstatus)");
     		$sth->execute(array(
     			':requestby'=>$data['requestby'],
     			':site'=>$data['site'],

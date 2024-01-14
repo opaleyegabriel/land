@@ -1,120 +1,24 @@
-[09-Jan-2024 18:26:33 UTC] PHP Warning:  Undefined variable $STH in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:26:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on null in /home/dreamcit/public_html/land/models/createimprest_model.php:34
-Stack trace:
-#0 /home/dreamcit/public_html/land/controller/createimprest.php(12): Createimprest_model->unclosedimprestvouchers()
-#1 /home/dreamcit/public_html/land/libs/Bootstrap.php(58): Createimprest->index()
-#2 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#3 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:28:00 UTC] PHP Warning:  Undefined variable $STH in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:28:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on null in /home/dreamcit/public_html/land/models/createimprest_model.php:34
-Stack trace:
-#0 /home/dreamcit/public_html/land/controller/createimprest.php(12): Createimprest_model->unclosedimprestvouchers()
-#1 /home/dreamcit/public_html/land/libs/Bootstrap.php(58): Createimprest->index()
-#2 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#3 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:28:05 UTC] PHP Warning:  Undefined variable $STH in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:28:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on null in /home/dreamcit/public_html/land/models/createimprest_model.php:34
-Stack trace:
-#0 /home/dreamcit/public_html/land/controller/createimprest.php(12): Createimprest_model->unclosedimprestvouchers()
-#1 /home/dreamcit/public_html/land/libs/Bootstrap.php(58): Createimprest->index()
-#2 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#3 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 34
-[09-Jan-2024 18:29:56 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:29:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
+[13-Jan-2024 21:10:53 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
+[13-Jan-2024 21:10:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
 Stack trace:
 #0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
 #1 {main}
   thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:29:56 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:29:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
+[13-Jan-2024 21:10:53 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
+[13-Jan-2024 21:10:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
 Stack trace:
 #0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
 #1 {main}
   thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:29:59 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:29:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
+[13-Jan-2024 21:10:53 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
+[13-Jan-2024 21:10:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
 Stack trace:
 #0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
 #1 {main}
   thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:30:00 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:30:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
+[13-Jan-2024 21:10:53 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
+[13-Jan-2024 21:10:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
 Stack trace:
 #0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
 #1 {main}
   thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:30:00 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:30:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
-Stack trace:
-#0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#1 {main}
-  thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:30:18 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28
-[09-Jan-2024 18:34:05 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28
-[09-Jan-2024 18:35:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28
-[09-Jan-2024 18:36:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28
-[09-Jan-2024 18:37:03 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
-Stack trace:
-#0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#1 {main}
-  thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:04 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
-Stack trace:
-#0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#1 {main}
-  thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:04 UTC] PHP Warning:  require(controller/error.php): Failed to open stream: No such file or directory in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'controller/error.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/dreamcit/public_html/land/libs/Bootstrap.php:25
-Stack trace:
-#0 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#1 {main}
-  thrown in /home/dreamcit/public_html/land/libs/Bootstrap.php on line 25
-[09-Jan-2024 18:37:06 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28
-[09-Jan-2024 18:38:24 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/dreamcit/public_html/land/models/createimprest_model.php:28
-Stack trace:
-#0 /home/dreamcit/public_html/land/models/createimprest_model.php(28): PDOStatement->execute(Array)
-#1 /home/dreamcit/public_html/land/controller/createimprest.php(23): Createimprest_model->new(Array)
-#2 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Createimprest->new()
-#3 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#4 {main}
-  thrown in /home/dreamcit/public_html/land/models/createimprest_model.php on line 28

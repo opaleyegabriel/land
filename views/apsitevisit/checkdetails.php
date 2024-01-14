@@ -338,7 +338,7 @@ session::init();
                 <h2 class="text-xl font-semibold mt-7"> Site Visit Request Approval</h2>
                  <?php
                    // echo "<pre>";
-                    print_r($this->getapprovallist);
+                   // print_r($this->getapprovallist);
                     
                     $result=$this->getapprovallist;
                     /*
@@ -351,12 +351,14 @@ session::init();
                     */
                
               echo  ' <form method="POST" enctype="multipart/form-data" action="' . URL . 'apsitevisit/effectsiteapproval">
-                        <input type="text" value="'. $result["requestby"].'" readOnly name="requestby" >
+                        
+                        <input type="hidden" value="'. $result["branchid"].'" readOnly name="requestby" >
                         <input type="text" value="'.$result["site"].'" readOnly name="site" >
                         <input type="text" value="'.$result["purpose"].'" readOnly name="purpose" >
                         <input type="number" value="'.$result["amount"].'" name="amount" >
+                        <input type="text" value="'.$result["requestby"].'" name="userrequest" >
                         <input type="hidden" value="'.$result["id"].'" name="id">
-                        <input type="text" value"'.$result["branch"].'" name="branchid">
+                        
                         <select name="decision">
                           <option value="APPROVED">Aprrove</option>
                           <option value="DECLINE">Decline</option>                          

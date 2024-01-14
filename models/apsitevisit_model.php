@@ -30,6 +30,7 @@ class Apsitevisit_model extends Model {
     	return $sth->fetch();
     }
     public function effectsiteapproval($data){
+        
         $sth=$this->db->prepare("UPDATE tbl_sitevisit SET amount=:amount,comment=:comment,vstatus=:vstatus WHERE id=:id ");
         $sth->execute(array(
             ':amount'=>$data["amount"],
@@ -37,14 +38,15 @@ class Apsitevisit_model extends Model {
             ':vstatus'=>$data["decision"],
             ':id'=>$data["id"]
             ));        
-
-            $descr="Being amount for site visit by  ".$data['requestby'];
+            
+           // print_r($data);
+           // exit();
             //CREATE imprest directly
-            $s=$this->db->prepare("INSERT INTO tbl_imprest VALUES(:id,:bid,:descr,:amt,:ist) ");
+            $s=$this->db->prepare("INSERT INTO tbl_imprest (imprestid,branchid,description,amount,istatus)VALUES(:idd,:bid,:descr,:amt,:ist) ");
             $s->execute(array(
-                ':id'=>$data['id'],
+                ':idd'=>$data['id'],
                 ':bid'=>$data['branchid'],
-                ':descr'=>$descr,
+                ':descr'=>$data['descr'],
                 ':amt'=>$data['amount'],
                 ':ist'=>'Paid'
             ));

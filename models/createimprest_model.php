@@ -21,12 +21,23 @@ class Createimprest_model extends Model {
 
 
     public function new($data){
-    	$sth=$this->db->prepare("INSERT INTO tbl_impresthead(amount,branchid,ustatus) VALUES(:amount,:branchid,:ustatus)");
-    	$sth->execute(array(
+		$check=$this->db->prepare("SELECT * FROM tbl_impresthead WHERE branchid=:bid AND ustatus=:ust");
+		$check->execute(array(
+			':branchid'=>$data['staff'],
+			':ust'=>'OPEN'
+		));
+		$result=$check->fetch();
+		if($result){
+			//you cant add imprest for any branch that doesnt retired the existing money sent as imprest previously
+		}else{
+			$sth=$this->db->prepare("INSERT INTO tbl_impresthead(amount,branchid,ustatus) VALUES(:amount,:branchid,:ustatus)");
+    		$sth->execute(array(
     		':amount'=>$data['amount'],
     		':branchid'=>$data["staff"],
-    		':ustatus'=> "Start"
+    		':ustatus'=> "OPEN"
     		));
+		}
+    	
     }
 
     public function unclosedimprestvouchers(){

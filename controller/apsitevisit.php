@@ -4,6 +4,20 @@ class Apsitevisit extends Controller{
     function __construct(){
                 parent::__construct();
                 Session::init();
+                $this->view->js=array('apsitevisit/js/default.js');
+                $logged=Session::get('adminuser');
+                $usertype=Session::get('usertype');
+                if ($logged==false)
+                {
+                    Session::destroy();
+                    header('location: '. URL . 'admlogin');
+                    exit;
+                }elseif ($usertype != 1) //super admin is 1 other admin is 0
+                {
+                    # code...
+                    header('location: '. URL . 'admdashboard');
+
+                } 
                 
 
         }
@@ -25,12 +39,13 @@ class Apsitevisit extends Controller{
               $data['decision']=$_POST['decision'];
               $data['comment']=$_POST['comment'];
               $data['id']=$_POST['id'];
-              $data['branchid']=$_POST['branchid'];
-              $data['requestby']=$_POST['requestby'];
-              echo "<pre>";
-              print_r($data);
-              //$this->model->effectsiteapproval($data);
-              //$this->view->render('apsitevisit/checkdetails');
+              $data['userrequest']=$_POST['userrequest'];
+              $data['branchid']=$_POST['requestby'];
+              $data['descr']="Being amount for site visit by  ".$data['userrequest'];
+              //echo "<pre>";
+              //print_r($data);
+              $this->model->effectsiteapproval($data);
+              $this->view->render('apsitevisit/index');
 
             }
 }
