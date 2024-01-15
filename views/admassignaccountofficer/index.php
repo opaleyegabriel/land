@@ -1,33 +1,6 @@
 <?php
 session::init();
 
-/*
-    require_once  ('models/dashboard_model.php');
-    $d= new Dashboard_Model();
-    $allmyproducts=($d->all_ind_products());
-    $allitems=($d->allitems());
-    
-    
-    echo "<pre>";
-    print_r($checkforunsettledpayments);
-    exit();
-    
-	//this is for list of posts
-    $msgDisplay=($d->DisplayMsgList());
-    //this is for post counts
-    $msgDisplaycount=($d->DisplayMsgCount());
-    $tharraycount=count($msgDisplaycount);
-    //this is for daily bet prediction
-    $freebet=($d->GetTodayPrediction());
-    //This is for advert
-    $advert=($d->SelectRandonSpecialAdvert());
-     
-     echo "<pre>";
-    print_r($this->checkforunsettledpayments);
-    exit();
-   */
-    
-    
 ?>
 
 
@@ -73,8 +46,8 @@ session::init();
                                         <img src="<?php echo URL; ?>public/images/pimage.png" alt="">
                                     </div>
                                     <div class="user_name">
-                                        <div> <?php echo Session::get("currentuser");?> </div>
-                                        
+                                        <div> <?php echo Session::get("name");?> </div>
+                                        <span> <?php echo Session::get("lphone");?></span>
                                     </div>
                                 </a>
 
@@ -111,9 +84,9 @@ session::init();
         </header>
 
         <!-- sidebar -->
-        <div class="sidebar">
+         <div class="sidebar">
 
-        <div class="sidebar_inner" data-simplebar>
+         <div class="sidebar_inner" data-simplebar>
 
 <ul>
     <li class="active"><a href="<?php echo URL."admdashboard" ?>">
@@ -138,33 +111,6 @@ session::init();
 
     ?>
 
-<?php
-    if(Session::get('usertype')==1){
-        echo '
-        <li><a href="'. URL."svfeedback".'">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
-            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-        </svg> <span> Site Visits Feedback</span> </a>
-    </li>
-        ';
-    }
-
-    ?>
-
-<?php
-    if(Session::get('usertype')==1){
-        echo '
-        <li><a href="'. URL."admassignaccountofficer".'">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
-            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-        </svg> <span> Manage Client Account</span> </a>
-    </li>
-        ';
-    }
-
-    ?>
     <?php
     if(Session::get('usertype')==1){
         echo '
@@ -381,11 +327,6 @@ session::init();
 
 </div>
 
-
-
-
-          
-
             <!-- sidebar overly for mobile -->
             <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
 
@@ -405,40 +346,166 @@ session::init();
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
 
-                        <div class="card-media h-28" id="demodiv">Final Opportunity on Peace City and New Town Estate FESTIVE PROMO ends in <p id="demo"></p></div>
-                        
-
-
-                            
-                     
-                     
-                      <h2 class="text-xl font-semibold mt-7"> BAs and Agent Account  </h2>
-                      <div class="card">
-                      <form enctype="multipart/form-data" action="<?php echo URL."admdashboard/createaccount" ?>" method="post" >                       
-                          <div class="card-body">                                      
-                            <input type="text" name="name" value="" class="with-border" placeholder="BAs or agent name" required>
-                                <input type="text" name="bank" value="" class="with-border"  placeholder="Bank" required>
-                                <input type="text" name="acctnum" value="" class="with-border"  placeholder="Account Number" required>
-                                <input type="text" name="mobile" value="" class="with-border"  placeholder="Mobile Number" required>                                
-                                <input type="submit" value="Create Account">
-                                
-
-                          </div></form>
-
-
-
-                          </div>
-
-         
-
-
-
-                       
                       
-
+                      <h2 class="text-xl font-semibold mt-7"> List of Approved Payments </h2>
+                      <div id="showIlorin"><input type="button" value="Show Ilorin Client"></div>
+                      <div id="showOsogbo"><input type="button" value="Show Osogbo Client"></div>
+                      <div id="showIbadan"><input type="button" value="Show Ibadan Client"></div>
+                      
                     </div>
 
                 </div>
+    <div id="Ilorin">
+    <h2 class="text-xl font-semibold mt-7"> Ilorin Client List </h2>
+                        <table class="table table-striped table-dark">
+                            <thead>
+                        <tr>
+                            <td>s/n</td>
+                            <td scope="col" align="center">Product ID</td>
+                            <td scope="col" align="center">Product Name</td>
+                            <td scope="col" align="center">Price/Plot</td>                  
+                            <td scope="col" align="center">Qty Purchased</td>
+                            <td scope="col" align="center">Client Full Name</td>  
+                            <td scope="col" align="center">Mobile Number</td>
+                            <td scope="col" align="center">Manage Account</td>
+                        </tr>
+                        </thead>
+                    <tbody>
+                    </tbody>
+                        <?php
+                        //  print_r($this->paymentlist);
+                        
+                        $sn=1;
+                        foreach ($this->alllist as $key => $value) {
+                            # code...
+                            echo'
+                                <tr>
+                                    <td scope="col" align="left">'. $sn .'</td>
+                                    <td scope="col" >'. $value["pid"] .'</td>
+                                    <td scope="col" align="left"> '. ($value["pname"]) .'</td>
+                                   
+                                    <td scope="col" align="right"> '. number_format($value["price"]) .'</td>
+                                    <td scope="col" align="right"> '. $value["pqty"] .'</td>
+                                    <td scope="col" align="left"> '. $value["name"] .'</td>
+                                    <td scope="col" align="left"> '. $value["mobile"] .'</td>
+                                    <td scope="col" align="center"><a href='. URL ."admassignaccountofficer/manager/". $value["mobile"] .'><input type="button" value="Manage"/></a></td>
+                                </tr>
+
+
+                            ';
+                            $sn++;
+                        }
+                        
+                        ?>
+                </table>
+            </div>                 
+
+
+
+            <div id="Osogbo">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                        <tr>
+                        <td>s/n</td>
+                            <td scope="col" align="center">Product ID</td>
+                            <td scope="col" align="center">Product Name</td>
+                            <td scope="col" align="center">Price/Plot</td>                  
+                            <td scope="col" align="center">Qty Purchased</td>
+                            <td scope="col" align="center">Client Full Name</td>  
+                            <td scope="col" align="center">Mobile Number</td>
+                            <td scope="col" align="center">Manage Account</td>
+                       </tr>
+                        </thead>
+                    <tbody>
+                    </tbody>
+                        <?php
+                        //  print_r($this->paymentlist);
+                        
+                        $sn=1;
+                        foreach ($this->alllist_osogbo as $key => $value) {
+                            # code...
+                            echo'
+                                <tr>
+                                    <td scope="col" align="left">'. $sn .'</td>
+                                    <td scope="col" >'. $value["pid"] .'</td>
+                                    <td scope="col" align="left"> '. ($value["pname"]) .'</td>
+                                   
+                                    <td scope="col" align="right"> '. number_format($value["price"]) .'</td>
+                                    <td scope="col" align="right"> '. $value["pqty"] .'</td>
+                                    <td scope="col" align="left"> '. $value["name"] .'</td>
+                                    <td scope="col" align="left"> '. $value["mobile"] .'</td>
+                                    <td scope="col" align="center"><input type="button" value="Manage"/></td>
+                                </tr>
+
+
+                            ';
+                            $sn++;
+                        }
+                        
+                        ?>
+                </table>
+            </div> 
+
+
+            <div id="Ibadan">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                        <tr>
+                        <td>s/n</td>
+                            <td scope="col" align="center">Product ID</td>
+                            <td scope="col" align="center">Product Name</td>
+                            <td scope="col" align="center">Price/Plot</td>                  
+                            <td scope="col" align="center">Qty Purchased</td>
+                            <td scope="col" align="center">Client Full Name</td>  
+                            <td scope="col" align="center">Mobile Number</td>
+                            <td scope="col" align="center">Manage Account</td>
+                        </tr>
+                        </thead>
+                    <tbody>
+                    </tbody>
+                        <?php
+                        //  print_r($this->paymentlist);
+                        
+                        $sn=1;
+                        foreach ($this->alllist_ibadan as $key => $value) {
+                            # code...
+                            echo'
+                                <tr>
+                                    <td scope="col" align="left">'. $sn .'</td>
+                                    <td scope="col" >'. $value["pid"] .'</td>
+                                    <td scope="col" align="left"> '. ($value["pname"]) .'</td>
+                                   
+                                    <td scope="col" align="right"> '. number_format($value["price"]) .'</td>
+                                    <td scope="col" align="right"> '. $value["pqty"] .'</td>
+                                    <td scope="col" align="left"> '. $value["name"] .'</td>
+                                    <td scope="col" align="left"> '. $value["mobile"] .'</td>
+                                    <td scope="col" align="center"><input type="button" value="Manage"/></td>
+                                </tr>
+
+
+                            ';
+                            $sn++;
+                        }                        
+                        ?>
+                </table>
+            </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -490,49 +557,3 @@ var x = setInterval(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <!-- For Night mode -->
-    <script>
-        (function (window, document, undefined) {
-            'use strict';
-            if (!('localStorage' in window)) return;
-            var nightMode = localStorage.getItem('gmtNightMode');
-            if (nightMode) {
-                document.documentElement.className += ' night-mode';
-            }
-        })(window, document);
-
-        (function (window, document, undefined) {
-
-            'use strict';
-
-            // Feature test
-            if (!('localStorage' in window)) return;
-
-            // Get our newly insert toggle
-            var nightMode = document.querySelector('#night-mode');
-            if (!nightMode) return;
-
-            // When clicked, toggle night mode on or off
-            nightMode.addEventListener('click', function (event) {
-                event.preventDefault();
-                document.documentElement.classList.toggle('dark');
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('gmtNightMode', true);
-                    return;
-                }
-                localStorage.removeItem('gmtNightMode');
-            }, false);
-
-        })(window, document);
-    </script>
