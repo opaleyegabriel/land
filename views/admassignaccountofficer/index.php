@@ -360,7 +360,7 @@ session::init();
                         <table class="table table-striped table-dark">
                             <thead>
                         <tr>
-                            <td>s/n</td>
+                           
                             <td scope="col" align="center">Product ID</td>
                             <td scope="col" align="center">Product Name</td>
                             <td scope="col" align="center">Price/Plot</td>                  
@@ -368,6 +368,7 @@ session::init();
                             <td scope="col" align="center">Client Full Name</td>  
                             <td scope="col" align="center">Mobile Number</td>
                             <td scope="col" align="center">Manage Account</td>
+                            <td>s/n</td>
                         </tr>
                         </thead>
                     <tbody>
@@ -380,7 +381,7 @@ session::init();
                             # code...
                             echo'
                                 <tr>
-                                    <td scope="col" align="left">'. $sn .'</td>
+                                    
                                     <td scope="col" >'. $value["pid"] .'</td>
                                     <td scope="col" align="left"> '. ($value["pname"]) .'</td>
                                    
@@ -389,6 +390,7 @@ session::init();
                                     <td scope="col" align="left"> '. $value["name"] .'</td>
                                     <td scope="col" align="left"> '. $value["mobile"] .'</td>
                                     <td scope="col" align="center"><a href='. URL ."admassignaccountofficer/manager/". $value["mobile"] .'><input type="button" value="Manage"/></a></td>
+                                    <td scope="col" align="left">'. $sn .'</td>
                                 </tr>
 
 
@@ -406,7 +408,7 @@ session::init();
                         <table class="table table-striped table-dark">
                             <thead>
                         <tr>
-                        <td>s/n</td>
+                        
                             <td scope="col" align="center">Product ID</td>
                             <td scope="col" align="center">Product Name</td>
                             <td scope="col" align="center">Price/Plot</td>                  
@@ -414,6 +416,7 @@ session::init();
                             <td scope="col" align="center">Client Full Name</td>  
                             <td scope="col" align="center">Mobile Number</td>
                             <td scope="col" align="center">Manage Account</td>
+                            <td>s/n</td>
                        </tr>
                         </thead>
                     <tbody>
@@ -426,7 +429,7 @@ session::init();
                             # code...
                             echo'
                                 <tr>
-                                    <td scope="col" align="left">'. $sn .'</td>
+                                   
                                     <td scope="col" >'. $value["pid"] .'</td>
                                     <td scope="col" align="left"> '. ($value["pname"]) .'</td>
                                    
@@ -434,7 +437,8 @@ session::init();
                                     <td scope="col" align="right"> '. $value["pqty"] .'</td>
                                     <td scope="col" align="left"> '. $value["name"] .'</td>
                                     <td scope="col" align="left"> '. $value["mobile"] .'</td>
-                                    <td scope="col" align="center"><input type="button" value="Manage"/></td>
+                                    <td scope="col" align="center"><a href='. URL ."admassignaccountofficer/manager/". $value["mobile"] .'><input type="button" value="Manage"/></a></td>
+                                    <td scope="col" align="left">'. $sn .'</td>
                                 </tr>
 
 
@@ -451,7 +455,7 @@ session::init();
                         <table class="table table-striped table-dark">
                             <thead>
                         <tr>
-                        <td>s/n</td>
+                        
                             <td scope="col" align="center">Product ID</td>
                             <td scope="col" align="center">Product Name</td>
                             <td scope="col" align="center">Price/Plot</td>                  
@@ -459,6 +463,7 @@ session::init();
                             <td scope="col" align="center">Client Full Name</td>  
                             <td scope="col" align="center">Mobile Number</td>
                             <td scope="col" align="center">Manage Account</td>
+                            <td>s/n</td>
                         </tr>
                         </thead>
                     <tbody>
@@ -471,7 +476,7 @@ session::init();
                             # code...
                             echo'
                                 <tr>
-                                    <td scope="col" align="left">'. $sn .'</td>
+                                    
                                     <td scope="col" >'. $value["pid"] .'</td>
                                     <td scope="col" align="left"> '. ($value["pname"]) .'</td>
                                    
@@ -479,7 +484,8 @@ session::init();
                                     <td scope="col" align="right"> '. $value["pqty"] .'</td>
                                     <td scope="col" align="left"> '. $value["name"] .'</td>
                                     <td scope="col" align="left"> '. $value["mobile"] .'</td>
-                                    <td scope="col" align="center"><input type="button" value="Manage"/></td>
+                                    <td scope="col" align="center"><a href='. URL ."admassignaccountofficer/manager/". $value["mobile"] .'><input type="button" value="Manage"/></a></td>
+                                    <td scope="col" align="left">'. $sn .'</td>
                                 </tr>
 
 

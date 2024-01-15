@@ -372,9 +372,7 @@ $branch=session::get("branch");
 
 
 
-                <div class="lg:flex lg:space-x-12">
-
-                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
+            
 
                       <table>
                         <tr>
@@ -388,37 +386,32 @@ $branch=session::get("branch");
     
          
 
-         <?php 
+                      <?php 
          echo '<div id="divinitiate">'; 
+         //print_r($this->imprestheadid);
+         $res=$this->imprestheadid;
          ?>  
          
                       <h2 class="text-xl font-semibold mt-7"> Initiate Imprest </h2>
                     <div class="card">
-                        <form enctype="multipart/form-data" action="<?php echo URL."createimprest/new" ?>" method="post" >                      
-                          <div class="card-body">                                      
-                                <select name="staff" id="staff-list" onchange="getBranch(this.value)" >
-                                    <option value disabled selected>Select a Staff</option>
-                                    <?php
-                                    foreach($this->GetStaff as $staff) {
-                                        ?>
-                                        <option value="<?php echo $staff["branch"]; ?>"><?php echo $staff["username"]; ?></option>
-                                    <?php                                }
-                                    ?>
-                                </select>        
-                                <input type="text" name="description" value="" class="with-border"  placeholder="Being Imprest " required> 
+                        <form enctype="multipart/form-data" action="<?php echo URL."imprest/new" ?>" method="post" >                      
+                          <div class="card-body">
+                                <input type="hidden" name="imprestheadid" value="<? echo $res['branchid'] ;?>" readOnly>
+                                <input type="text" name="description" value="" class="with-border"  placeholder="purpose of giving imprest " required> 
                                 <input type="Number" name="amount" value="" class="with-border"  placeholder="Imprest  Amount" required>
-                                <input type="submit" value="New Imprest">
+                                <input type="submit" value="Save Imprest Expenses">
                             </div>
                         </form>
                     </div>
-                     <h2 class="text-xl font-semibold mt-7"> List of Unclosed Imprest Vouchers </h2>
+                     <h2 class="text-xl font-semibold mt-7"> List of unretired Imprest </h2>
                     <table class="table table-striped table-dark">
                         <thead>
                     <tr><td scope="col" align="center">Serial No</td>                    
                         <td scope="col" align="center">Date Disbursed</td>
+                        <td scope="col" align="center"> Details </td> 
                         <td scope="col" align="center">Amount</td>                      
-                        <td scope="col" align="center"> View </td>                      
-                        <td scope="col" align="center"> Close </td> 
+                                           
+                      
                     </tr>
                     </thead>
                     <tbody>
@@ -429,15 +422,14 @@ $branch=session::get("branch");
                                 $sn=1;
                                 //$n="YES";
                                 //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unclosedimprestvouchers as $key => $value) {
+                                foreach ($this->unretiredimprestvouchers as $key => $value) {
                                     # code...
                                     echo'
                                         <tr>
                                         <td scope="col" align="left">'. $sn .'</td>
                                             <td scope="col"  align="left">'. $value["created_at"] .'</td>
-                                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                                            <td scope="col" align="center"><a href='. URL ."createimprest/viewtransactions/". $value["id"] .'><input type="button" value="View"></a> </td>
-                                            <td scope="col" align="center"> <a href='. URL ."createimprest/closeimprest/". $value["id"] .'><input type="button" value="Close"></a>  </td>  
+                                            <td scope="col" align="left">'.$value['description'].'</td>
+                                            <td scope="col" align="right">'.$value['amount'].'</td> 
                                                                     
                                         </tr>
 
@@ -458,15 +450,16 @@ $branch=session::get("branch");
          echo '<div id="divretire">';
          ?>  
          
-                      <h2 class="text-xl font-semibold mt-7"> Retire Imprest </h2>
+                      
                     <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest</h2>
                     <table class="table table-striped table-dark">
                         <thead>
                     <tr><td scope="col" align="center">Serial No</td>                    
                         <td scope="col" align="center">Date Disbursed</td>
-                        <td scope="col" align="center">Amount</td>                      
-                        <td scope="col" align="center"> View </td>                      
-                        <td scope="col" align="center"> Close </td> 
+                        <td scope="col" align="center">Amount</td>    
+                        <td scope="col" align="center">Details</td> 
+                                          
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -477,16 +470,15 @@ $branch=session::get("branch");
                                 $sn=1;
                                 //$n="YES";
                                 //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unclosedimprestvouchers as $key => $value) {
+                                foreach ($this->unretiredimprestvouchers as $key => $value) {
                                     # code...
                                     echo'
                                         <tr>
                                         <td scope="col" align="left">'. $sn .'</td>
                                             <td scope="col"  align="left">'. $value["created_at"] .'</td>
                                             <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                                            <td scope="col" align="center"><a href='. URL ."createimprest/viewtransactions/". $value["id"] .'><input type="button" value="View"></a> </td>
-                                            <td scope="col" align="center"> <a href='. URL ."createimprest/closeimprest/". $value["id"] .'><input type="button" value="Close"></a>  </td>  
-                                                                    
+                                            <td scope="col" align="left">'. $value['description'] .'</td>
+                                                                   
                                         </tr>
 
 
@@ -502,8 +494,7 @@ $branch=session::get("branch");
             echo "</div>";
          ?> 
 
-            </div>
-        </div>
+          
         </div>
     </div>
             

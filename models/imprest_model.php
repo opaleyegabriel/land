@@ -9,28 +9,61 @@ class Imprest_model extends Model {
         session::init();
 
     }
+  
+	public function imprestheadid(){
+		$select=$this->db->prepare("SELECT * FROM tbl_impresthead WHERE branchid=:bid AND ustatus=:ust");
+		$select->execute(array(
+			':bid'=>session::get("branch"),
+			':ust'=>"OPEN"
+		));
+		return $select->fetch();
 
-
-    public function GetStaff(){
-    	$sth=$this->db->prepare("SELECT * FROM tbl_adm WHERE usertype=0");
-    	$sth->execute();
-    	return $sth->fetchAll();
-    }
-
-
+	}
     public function new($data){
-    	$sth=$this->db->prepare("INSERT INTO tbl_impresthead(amount,branchid,ustatus) VALUES(:amount,:branchid,:ustatus)");
-    	$sth->execute(array(
-    		':amount'=>$data['amount'],
-    		':branchid'=>$data["staff"],
-    		':ustatus'=> "Start"
-    		));
+		
+
+
+		$select=$this->db->prepare("SELECT * FROM tbl_impresthead WHERE branchid=:bid AND ustatus=:ust");
+		$select->execute(array(
+			':bid'=>$data['imprestheadid'],
+			':ust'=>'OPEN'
+		));
+		$result=$select->fetch();
+		if($result){
+			$s=$this->db->prepare("INSERT INTO tbl_imprest (imprestid,branchid,description,amount,istatus)VALUES(:idd,:bid,:descr,:amt,:ist) ");
+			$s->execute(array(
+				':idd'=>$data['imprestheadid'],
+				':bid'=>session::get("branch"),
+				':descr'=>$data['description'],
+				':amt'=>$data['amount'],
+				':ist'=>'Paid'
+			));
+
+		}else {
+			echo '<script type="text/javascript">';
+					echo 'alert("No active imprest to handle the expenses, please Request for imprest");
+					window.location.href = "'.URL.'imprest";';
+				  echo "</script>";
+		}
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    public function unclosedimprestvouchers(){
-    	$sth=$this->db->prepare("SELECT * FROM tbl_impresthead WHERE ustatus <> :ust");
+    public function unretiredimprestvouchers(){
+    	$sth=$this->db->prepare("SELECT * FROM tbl_imprest WHERE istatus = :ust AND branchid=:bid");
     	$sth->execute(array(
-    		':ust'=> "CLOSED"
+    		':ust'=> "Paid",
+			':bid'=>session::get("branch")
     		));
     	return $sth->fetchAll();
     }
