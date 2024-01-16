@@ -370,94 +370,20 @@ $branch=session::get("branch");
 
 
 
-
-
-            
-
-                      <table>
-                        <tr>
-                            
-                            <td><input type="button" value="Initiate Imprest" id="initiate"></td>
-                            <td><input type="button" value="Retire" id="retire"></td>
-                        </tr>
-                        
-                        
-                      </table>
-    
-         
-
-                      <?php 
-         echo '<div id="divinitiate">'; 
-         //print_r($this->imprestheadid);
-         $res=$this->imprestheadid;
-         ?>  
-         
-                      <h2 class="text-xl font-semibold mt-7"> Initiate Imprest </h2>
-                    <div class="card">
-                        <form enctype="multipart/form-data" action="<?php echo URL."imprest/new" ?>" method="post" >                      
-                          <div class="card-body">
-                                <input type="hidden" name="imprestheadid" value="<? echo $res['id'] ;?>" readOnly>
-                                <input type="text" name="description" value="" class="with-border"  placeholder="purpose of giving imprest " required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="Imprest  Amount" required>
-                                <input type="submit" value="Save Imprest Expenses">
-                            </div>
-                        </form>
-                    </div>
-                     <h2 class="text-xl font-semibold mt-7"> List of unretired Imprest </h2>
-                    <table class="table table-striped table-dark">
-                        <thead>
-                    <tr><td scope="col" align="center">Serial No</td>                    
-                        <td scope="col" align="center">Date Disbursed</td>
-                        <td scope="col" align="center"> Details </td> 
-                        <td scope="col" align="center">Amount</td>                      
-                                           
-                      
-                    </tr>
-                    </thead>
-                    <tbody>
-                
-                                <?php
-                                //   print_r($this->unclosedimprestvouchers);
-                                
-                                $sn=1;
-                                //$n="YES";
-                                //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unretiredimprestvouchers as $key => $value) {
-                                    # code...
-                                    echo'
-                                        <tr>
-                                        <td scope="col" align="left">'. $sn .'</td>
-                                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
-                                            <td scope="col" align="left">'.$value['description'].'</td>
-                                            <td scope="col" align="right">'.$value['amount'].'</td> 
-                                                                    
-                                        </tr>
-
-
-                                    ';
-                                    $sn++;
-                                }
-                                
-                                ?>
-                                </tbody>
-                        </table>
-         
-         <?php
-            echo "</div>";
-         ?>    
-
         <?php 
          echo '<div id="divretire">';
          ?>  
          
                       
-                    <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest</h2>
+                    <h2 class="text-xl font-semibold mt-7"> List of Orders for</h2>
                     <table class="table table-striped table-dark">
                         <thead>
-                    <tr><td scope="col" align="center">Serial No</td>                    
-                        <td scope="col" align="center">Date Disbursed</td>
-                        <td scope="col" align="center">Amount</td>    
-                        <td scope="col" align="center">Details</td> 
+                    <tr><td scope="col" align="center">S/No</td>                    
+                        <td scope="col" align="center">Land</td>
+                        <td scope="col" align="center">Order No</td>    
+                        <td scope="col" align="center">Qty</td> 
+                        <td scope="col" align="center">Price/Qty</td> 
+                        <td scope="col" align="center">Total</td> 
                                           
                         
                     </tr>
@@ -465,19 +391,23 @@ $branch=session::get("branch");
                     <tbody>
                 
                                 <?php
-                                //   print_r($this->unclosedimprestvouchers);
+                               //print_r($this->listofclients);
                                 
                                 $sn=1;
                                 //$n="YES";
                                 //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unretiredimprestvouchers as $key => $value) {
+                                foreach ($this->personalorders as $key => $value) {
                                     # code...
+                                    $t=($value['pqty'] * $value['price']);
                                     echo'
                                         <tr>
                                         <td scope="col" align="left">'. $sn .'</td>
-                                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
-                                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                                            <td scope="col" align="left">'. $value['description'] .'</td>
+                                            <td scope="col"  align="left">'. $value["pname"] .'</td>
+                                            <td scope="col" align="right">'. $value["orderno"] .'</td>
+                                            <td scope="col" align="right">'. $value["pqty"] .'</td>
+                                            <td scope="col" align="right">'. $value["price"] .'</td>
+                                            <td scope="col" align="right">'. $t .'</td>
+                                            <td scope="col" align="center"><a href='. URL ."admcustomeraccount/managedetails/". $value["orderno"] .'><input type="button" value="Manage Docs"></a></td>
                                                                    
                                         </tr>
 

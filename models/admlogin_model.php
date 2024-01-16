@@ -25,6 +25,7 @@ class Admlogin_model extends Model {
             session::set("adminuser", true);          
             session::set("usertype", $result['usertype']); 
             session::set("branch", $result['branch']); 	
+            session::set("loginmobile", $result['mobile']); 
             //print (session::get("currentuser"));
             //exit();
             //

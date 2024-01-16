@@ -25,9 +25,11 @@ class Createimprest extends Controller{
         
     }
     public function viewtransactions($id){
-        echo $id;
+        $this->view->listtransaction=$this->model->viewtransactions($id);
+        $this->view->render('createimprest/viewtransactions');
     }
     public function closeimprest($id){
-        echo $id;
+        $this->model->closeimprest($id);
+        $this->view->render('createimprest/index');
     }
 }

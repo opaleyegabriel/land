@@ -371,96 +371,35 @@ $branch=session::get("branch");
 
                     <div class="lg:w-1/4 flex-shrink-0 space-y-5">
 
-                      <table>
-                        <tr>
-                            <td><input type="button" value="Create Imprest" id="create"></td>
-                            <td><input type="button" value="Retire" id="retire"></td>
-                        </tr>
+                    <?php
+                    function Branch(int $a){
+                        if($a==1){
+                            return "ILORIN";
+                        }elseif ($a==2) {
+                             return "OSOGBO";
+                        }elseif($a==3){
+                            return "IBADAN";
+                        }
+                    }
+                        foreach ($this->listtransaction  as $key => $value1) {
+                            # code...
+
+
+                            $p=$value1['branchid'];
+                        }
+
+                        $branchname=Branch($p);
                         
-                        
-                      </table>
-    <?php
-        
-        echo "<div id='divcreate'>"; 
-    ?>  
-    
-                      <h2 class="text-xl font-semibold mt-7"> Create Imprest </h2>
-                    <div class="card">
-                        <form enctype="multipart/form-data" action="<?php echo URL."createimprest/new" ?>" method="post" >                      
-                          <div class="card-body">                                      
-                                <select name="staff" id="staff-list" onchange="getBranch(this.value)" >
-                                    <option value disabled selected>Select a Staff</option>
-                                    <?php
-                                    foreach($this->GetStaff as $staff) {
-                                        ?>
-                                        <option value="<?php echo $staff["branch"]; ?>"><?php echo $staff["username"]; ?></option>
-                                    <?php                                }
-                                    ?>
-                                </select>        
-                                <input type="text" name="description" value="" class="with-border"  placeholder="Being Imprest " required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="Imprest  Amount" required>
-                                <input type="submit" value="New Imprest">
-                            </div>
-                        </form>
-                    </div>
-                     <h2 class="text-xl font-semibold mt-7"> List of Unclosed Imprest Vouchers </h2>
-                    <table class="table table-striped table-dark">
-                        <thead>
-                    <tr><td scope="col" align="center">Serial No</td>                    
-                        <td scope="col" align="center">Date Disbursed</td>
-                        <td scope="col" align="center">Amount</td>                      
-                        <td scope="col" align="center"> View </td>                      
-                        <td scope="col" align="center"> Close </td> 
-                    </tr>
-                    </thead>
-                    <tbody>
-                
-                                <?php
-                                //   print_r($this->unclosedimprestvouchers);
-                                
-                                $sn=1;
-                                //$n="YES";
-                                //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unclosedimprestvouchers as $key => $value) {
-                                    # code...
-                                    echo'
-                                        <tr>
-                                        <td scope="col" align="left">'. $sn .'</td>
-                                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
-                                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                                            <td scope="col" align="center"><a href='. URL ."createimprest/viewtransactions/". $value["id"] .'><input type="button" value="View"></a> </td>
-                                            <td scope="col" align="center"> <a href='. URL ."createimprest/closeimprest/". $value["id"] .'><input type="button" value="Close"></a>  </td>  
-                                                                    
-                                        </tr>
-
-
-                                    ';
-                                    $sn++;
-                                }
-                                
-                                ?>
-                                </tbody>
-                        </table>
-             
-         <?php
-            echo "</div>";
-         ?> 
-         
-
-        <?php 
-         echo '<div id="divretire">';
-         ?>  
-         
-                      <h2 class="text-xl font-semibold mt-7"> Retire Imprest </h2>
-                    <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest</h2>
+                    ?>
+                    <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest for <?php echo $branchname ?></h2>
                     <table class="table table-striped table-dark">
                         <thead>
                     <tr>
                         <td scope="col" align="center">Serial No</td>                    
                         <td scope="col" align="center">Date Disbursed</td>
-                        <td scope="col" align="center">Amount</td>                      
-                        <td scope="col" align="center"> View </td>                      
-                        <td scope="col" align="center"> Close </td> 
+                        <td scope="col" align="center">Description</td>                      
+                        <td scope="col" align="center"> Amount </td>                      
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -471,16 +410,15 @@ $branch=session::get("branch");
                                 $sn=1;
                                 //$n="YES";
                                 //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->unclosedimprestvouchers as $key => $value) {
+                                foreach ($this->listtransaction as $key => $value) {
                                     # code...
                                     echo'
                                         <tr>
                                         <td scope="col" align="left">'. $sn .'</td>
                                             <td scope="col"  align="left">'. $value["created_at"] .'</td>
+                                            <td scope="col"  align="left">'. $value["description"] .'</td>
                                             <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                                            <td scope="col" align="center"><a href='. URL ."createimprest/viewtransactions/". $value["id"] .'><input type="button" value="View"></a> </td>
-                                            <td scope="col" align="center"> <a href='. URL ."createimprest/closeimprest/". $value["id"] .'><input type="button" value="Retire"></a>  </td>  
-                                                                    
+                                                                   
                                         </tr>
 
 
@@ -491,10 +429,6 @@ $branch=session::get("branch");
                                 ?>
                                 </tbody>
                         </table>
-              
-         <?php
-            echo "</div>";
-         ?> 
 
             </div>
         </div>

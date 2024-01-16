@@ -19,7 +19,32 @@ class Createimprest_model extends Model {
     	return $sth->fetchAll();
     }
 
+	public function viewtransactions($id){
+		$select=$this->db->prepare("SELECT * FROM tbl_imprest WHERE imprestid=:id");
+		$select->execute(array(
+			':id'=>$id
+		));
+		return $select->fetchAll();
+	}
 
+	public function closeimprest($id){
+		$update=$this->db->prepare("UPDATE tbl_impresthead SET ustatus=:ust WHERE id=:id");
+		$update->execute(array(
+			':ust'=>"CLOSED",
+			':id'=>$id
+		));
+		$u=$this->db->prepare("UPDATE tbl_imprest SET istatus=:ist WHERE imprestid=:ipid");
+		$u->execute(array(
+			':ist'=>"RETIRED",
+			':ipid'=>$id
+		));
+
+		echo '<script type="text/javascript">';
+			            echo 'alert("Imprest successfully retired");
+			            window.location.href = "'.URL.'createimprest";';
+			          echo "</script>";
+
+	}
     public function new($data){
 		$check=$this->db->prepare("SELECT * FROM tbl_impresthead WHERE branchid=:bid AND ustatus=:ust");
 		$check->execute(array(

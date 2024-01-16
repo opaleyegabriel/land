@@ -1,6 +1,0 @@
-[14-Jan-2024 16:42:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Admassignaccountofficer_model::saveaccountofficer() in /home/dreamcit/public_html/land/controller/admassignaccountofficer.php:45
-Stack trace:
-#0 /home/dreamcit/public_html/land/libs/Bootstrap.php(48): Admassignaccountofficer->saveaccountofficer()
-#1 /home/dreamcit/public_html/land/index.php(15): Bootstrap->__construct()
-#2 {main}
-  thrown in /home/dreamcit/public_html/land/controller/admassignaccountofficer.php on line 45
