@@ -370,59 +370,106 @@ $branch=session::get("branch");
 
 
 
-        <?php 
-         echo '<div id="divretire">';
+
+
+            
+
+                      <table>
+                        <tr>
+                            
+                            <td><input type="button" value="Account Details" id="acctdetails"></td>
+                            <td><input type="button" value="Unblock Account" id="unblock"></td>
+                            <td><input type="button" value="Allocation" id="allocation"></td>
+                            <td><input type="button" value="Documentation" id="Documents"></td>
+                        </tr>
+                        
+                        
+                      </table>
+    
+         
+
+                      <?php 
+         echo '<div id="div_acctdetails">'; 
+       //  print_r($this->orderdetails);
+        // echo "<pre>";
+        // print_r($this->attributedpayments);
+         $order_result=$this->orderdetails;
          ?>  
          
-                      
-                    <h2 class="text-xl font-semibold mt-7"> List of Orders for</h2>
+         
+                     <h2 class="text-xl font-semibold mt-7"> Payment History  started on <?php echo '  '. $order_result['created_at'];?> </h2>
                     <table class="table table-striped table-dark">
                         <thead>
-                    <tr><td scope="col" align="center">S/No</td>                    
-                        <td scope="col" align="center">Land</td>
-                        <td scope="col" align="center">Order No</td>    
-                        <td scope="col" align="center">Qty</td> 
-                        <td scope="col" align="center">Price/Qty</td> 
-                        <td scope="col" align="center">Total</td> 
-                                          
-                        
+                    <tr><td scope="col" align="center">Serial No</td>                    
+                        <td scope="col" align="center">Date</td>
+                        <td scope="col" align="center"> Details </td> 
+                        <td scope="col" align="center">Amount</td>                      
+                                           
+                      
                     </tr>
                     </thead>
                     <tbody>
                 
                                 <?php
-                               //print_r($this->listofclients);
-                                
-                                $sn=1;
+                                //   print_r($this->unclosedimprestvouchers);
+                                               
+                                    $sn=1;
                                 //$n="YES";
                                 //echo date_format($date,"Y/m/d H:i:s");
-                                foreach ($this->personalorders as $key => $value) {
+                                $amount=0;
+                                foreach ($this->attributedpayments as $key => $value) {
                                     # code...
-                                    $t=($value['pqty'] * $value['price']);
+                                    $amount += $value['credit'];
+                                    $realorderno=$value['orderno'];
+                                    $mobile=$value['mobile'];
                                     echo'
                                         <tr>
                                         <td scope="col" align="left">'. $sn .'</td>
-                                            <td scope="col"  align="left">'. $value["pname"] .'</td>
-                                            <td scope="col" align="right">'. $value["orderno"] .'</td>
-                                            <td scope="col" align="right">'. $value["pqty"] .'</td>
-                                            <td scope="col" align="right">'. $value["price"] .'</td>
-                                            <td scope="col" align="right">'. $t .'</td>
-                                            <td scope="col" align="center"><a href='. URL ."admcustomeraccount/managedetails/". $value["orderno"] .'><input type="button" value="Account"></a></td>
-                                                                   
+                                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
+                                            <td scope="col" align="left">'.$value['refid'].'</td>
+                                            <td scope="col" align="right">'.$value['credit'].'</td> 
                                         </tr>
 
 
                                     ';
                                     $sn++;
                                 }
-                                
+                                echo "Total Amount Paid: ". $amount;
+                                                              
                                 ?>
                                 </tbody>
                         </table>
-              
+
+                        <h2 class="text-xl font-semibold mt-7"> Account Details </h2>
+                        <div class="card">
+                        <form enctype="multipart/form-data" action="<?php echo URL."admcustomeraccount/dailyreport" ?>" method="post" >                      
+                          <div class="card-body">
+                                <input type="text" value="<?php echo "Site Ordered :  ". $order_result['pname'] ?>" readOnly >
+                                <input type="text" value="<?php echo "Qty : ". $order_result['pqty'] ?>" readOnly>
+                                <input type="text" value="<?php echo "Unit Price : ". $order_result['price'] ?>" readOnly>
+                                <input type="text" value="<?php echo "Total Expected : ". ($order_result['pqty'] * $order_result['price']) ?>" readOnly>
+                                <input type="text" value="<?php echo "Amount Paid : ". $amount ;?>" readOnly>
+                                <input type="text" value="<?php echo "Balance  : ". (($order_result['pqty'] * $order_result['price']) - $amount) ;?>" readOnly>
+                                <label>Is Payment UP TO DATE?</label>
+                                    <select name="paymentstatus">
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                       
+                                    </select>
+                                <input type="text" value="" name="comment" placeholder="Give payment status">
+                                <input type="text" value="" name="comment2" placeholder="Report your efforts and achievements">
+                                <input type="hidden" value="<?php echo $realorderno ; ?>" name="orderno">
+                                <input type="hidden" value="<?php echo $mobile ;?>" name="mobile">
+                               <input type="submit" value="Submit Daily Report">
+                            </div>
+                        </form>
+                    </div>
+
+                        
+         
          <?php
             echo "</div>";
-         ?> 
+         ?>    
 
           
         </div>

@@ -26,5 +26,13 @@ class Admcustomeraccount extends Controller{
         }
 
 
+        public function managedetails($orderno){
+            //echo $orderno;
+            $this->view->orderdetails=$this->model->orderdetails($orderno);
+            $this->view->attributedpayments=$this->model->attributedpayments($orderno);
+            $this->view->render('admcustomeraccount/account'); 
+        }
+
+
     }
 
