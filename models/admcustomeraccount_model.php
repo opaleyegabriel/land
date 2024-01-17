@@ -11,6 +11,25 @@ class Admcustomeraccount_model extends Model {
         session::init();
 
     }
+
+    public function transactiondailyreport($data){
+        $insert=$this->db->prepare("INSERT INTO tbl_dailyhistory(balance,uptodate,comment,comment2,mobile,orderno,reportby,branchid)
+         VALUES(:b,:upd,:co1,:co2,:mobile,:orderno,:rptby,:branchid)");
+        $insert->execute(array(
+            ':b'=>$data['balance'],
+            ':upd'=>$data['uptodate'],
+            ':co1'=>$data['comment'],
+            ':co2'=>$data['comment2'],
+            ':mobile'=>$data['mobile'],
+            ':orderno'=>$data['orderno'],
+            ':rptby'=>$data['reportedby'],
+            ':branchid'=>$data['branchid']
+        ));
+        echo '<script type="text/javascript">';
+			            echo 'alert("Report Submitted successfully");
+                       
+			          echo </script>';
+    }
     public function attributedpayments($orderno){
         $order= $orderno .'%';
         $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno like :orderno AND paid=:p");

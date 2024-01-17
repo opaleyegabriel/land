@@ -33,6 +33,23 @@ class Admcustomeraccount extends Controller{
             $this->view->render('admcustomeraccount/account'); 
         }
 
+        public function transactiondailyreport(){
+            $data=array();
+            $data['balance']=$_POST["balance"];
+            $data['uptodate']=$_POST['paymentstatus'];
+            $data['comment']=$_POST['comment'];
+            $data['comment2']=$_POST['comment2'];
+            $data['mobile']=$_POST['mobile'];
+            $data['orderno']=$_POST['orderno'];
+            $data['reportedby']=session::get("currentuser");
+            $data['branchid']=session::get("branch");
+            //echo "<pre>";
+            //print_r($data);
+            $this->model->transactiondailyreport($data);
+            $this->view->render("admcustomeraccount/index");
+
+        }
+
 
     }
 
