@@ -557,7 +557,7 @@ session::set('adon',false);
 
 
 
-                            $date=date_create($this->dateofcontractactivation['created_at']);
+                            $date=($this->dateofcontractactivation['created_at']);
 
                             //$date1= date('Y-m-d H:i:s',strtotime('+1 month',strtotime($date)));
 
@@ -574,10 +574,20 @@ session::set('adon',false);
                             $nnn= ($month * number_format($this->dateofcontractactivation['pplannum']))." days";
                              
 
-                            $newendmonth=date_add($date,date_interval_create_from_date_string($nnn));
+                           // $newendmonth=date_add($date,date_interval_create_from_date_string($nnn));
 
-                             $newendmonth=date_format($date,"Y-m-d H:i:s");
-                             $newstartdate=date('Y-m-d', strtotime($newendmonth. ' + 1 days'));
+                             $newendmonth=date('Y-m-d H:i:s', strtotime($date .$nnn));
+                             $newstartdate=date('Y-m-d H:i:s', strtotime($newendmonth. ' + 1 days'));
+
+
+                             //$dateofactivation=($order_result['created_at']);
+                            // $nnn= ($month * number_format($productpaymentlength['pplannum']))." days";
+                            //$enddate=date_add($date,date_interval_create_from_date_string($nnn));
+                           
+
+
+
+
 
 
                              //calculate next 31 days

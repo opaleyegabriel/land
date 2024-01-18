@@ -341,23 +341,14 @@ echo '
         <div class="main_content">
             <div class="mcontainer">
 
-
-
-
-
-
-
-            
-
                       <table>
                         <tr>
                             
                             <td><input type="button" value="Account Details" id="acctdetails"></td>
                             <td><input type="button" value="Unblock Account" id="unblock"></td>
                             <td><input type="button" value="Allocation" id="allocation"></td>
-                            <td><input type="button" value="Documentation" id="Documents"></td>
+                            <td><input type="button" value="Documentation" id="documents"></td>
                         </tr>
-                        
                         
                       </table>
     
@@ -365,9 +356,7 @@ echo '
 
                       <?php 
          echo '<div id="div_acctdetails">'; 
-       //  print_r($this->orderdetails);
-        // echo "<pre>";
-        // print_r($this->attributedpayments);
+       
          $order_result=$this->orderdetails;
          ?>  
          
@@ -439,7 +428,10 @@ echo '
                                         <option value="NO">NO</option>
                                        
                                     </select>
-                                <input type="hidden" value="<?php echo (($order_result['pqty'] * $order_result['price']) - $amount) ;?>" name="balance" >
+                                    <?php 
+                                            $mybalance=(($order_result['pqty'] * $order_result['price']) - $amount);
+                                    ?>
+                                <input type="hidden" value="<?php echo $mybalance ;?>" name="balance" >
                                 <input type="text" value="" name="comment" placeholder="Give payment status" required>
                                 <input type="text" value="" name="comment2" placeholder="Report your efforts and achievements" required>
                                 <input type="hidden" value="<?php echo $realorderno ; ?>" name="orderno">
@@ -449,8 +441,6 @@ echo '
                         </form>
                     </div>
 
-                        
-         
          <?php
             echo "</div>";
          ?>    
@@ -461,31 +451,155 @@ echo '
 
         <?php 
          echo '<div id="div_unblock">'; 
-       //  print_r($this->orderdetails);
-        // echo "<pre>";
-        // print_r($this->attributedpayments);
-        // $order_result=$this->orderdetails;
-         ?>  
+         ?> 
          
-                        
+
+         <?php 
+         
+        // print_r($this->orderdetails);
+             $order_result=$this->orderdetails;
+           $productpaymentlength=$this->numofmonthlengthforaproduct;
+           //print($productpaymentlength['pplannum']);
+        //print_r($this->numofmonthlengthforaproduct);
+            $month=30;
+             //Date the transaction for this order started
+            $dateofactivation=($order_result['created_at']);
+             $nnn= ($month * number_format($productpaymentlength['pplannum']))." days";
+            //$enddate=date_add($date,date_interval_create_from_date_string($nnn));
+            $enddate = date('Y-m-d H:i:s', strtotime($dateofactivation .$nnn));
+             $newstartdate=date("Y-m-d H:i:s", strtotime($enddate. ' + 1 days'));
+             $today=date("Y-m-d H:i:s");
+             if(($mybalance > 0) && ($enddate < $today)){
+                echo 'ACCOUNT BLOCKED
+
+
+                <h2 class="text-xl font-semibold mt-7"> Payment History  started on'. $order_result["created_at"].' </h2>
+                <table class="table table-striped table-dark">
+                    <thead>
+                <tr><td scope="col" align="center">Serial No</td>                    
+                    <td scope="col" align="center">Date</td>
+                    <td scope="col" align="center"> Details </td> 
+                    <td scope="col" align="center">Amount</td>                      
+                                       
+                  
+                </tr>
+                </thead>
+                <tbody>';
+
+                                 $sn=1;
+                                //$n="YES";
+                                //echo date_format($date,"Y/m/d H:i:s");
+                                $amount=0;
+                                foreach ($this->attributedpayments as $key => $value) {
+                                    # code...
+                                    $amount += $value['credit'];
+                                    $realorderno=$value['orderno'];
+                                    $mobile=$value['mobile'];
+                                    echo'
+                                        <tr>
+                                        <td scope="col" align="left">'. $sn .'</td>
+                                            <td scope="col"  align="left">'. $value["created_at"] .'</td>
+                                            <td scope="col" align="left">'.$value['refid'].'</td>
+                                            <td scope="col" align="right">'. number_format($value['credit']).'</td> 
+                                        </tr>
+
+
+                                    ';
+                                    $sn++;
+                                }
+                               
+                echo '
+                </tbody>
+                <tfooter>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Paid</td>
+                        <td scope="col" align="right">=N='. number_format($amount).'</td>
+                    </tr>
+                </tfooter>
+             </table>';
+             $sms="Dear Client, date of your purchased land expired on". $enddate .", a new contract is activated in accordance to pre-contract agreement signed. thanks. DREAMCITY HES LTD ";
+            echo '
+                    <h2 class="text-xl font-semibold mt-7"> Account Expired on  '. $enddate .' </h2>
+                    <div>Note that New contract will be giving to the customer effective from a day after expiring date and at new Price</div>
+                    <div class="card">
+                    <form enctype="multipart/form-data" action="'.URL.'admcustomeraccount/unblockreport" method="post" >                      
+                    <div class="card-body">
+                            <input type="text" value="Site Ordered :'. $order_result["pname"].'" readOnly >
+                            <input type="text" value="Qty : '. $order_result["pqty"].'"readOnly>
+                            <input type="text" value="Unit Price : =N= '. number_format($order_result["price"]).'" readOnly>
+                            <input type="text" value="Total Expected : =N= ' . number_format(($order_result["pqty"] * $order_result["price"])).'" readOnly>
+                            <input type="text" value="Amount Paid : =N= '. number_format($amount).'" readOnly>
+                            <input type="text" value="Balance  : =N= '. number_format((($order_result["pqty"] * $order_result["price"]) - $amount)).'" readOnly>
+                            <input type="hidden" value="'.(($order_result["pqty"] * $order_result["price"]) - $amount).'" name="balance" >
+                            <input type="hidden" value="'.$realorderno.'" name="orderno">
+                            <input type="hidden" value="'. $mobile .'" name="mobile">
+                            <Label> New Price is as follows</label>
+                            <input type="text" value="Unit Price : =N= '. number_format($productpaymentlength["price"]).'" readOnly>
+                            <input type="text" value="New Total Expected : =N= ' . number_format(($order_result["pqty"] * $productpaymentlength["price"])).'" readOnly>
+                            <input type="text" value="Amount Paid : =N= '. number_format($amount).'" readOnly>
+                            <input type="text" value="New Balance  : =N= '. number_format((($order_result["pqty"] * $productpaymentlength["price"]) - $amount)).'" readOnly>
+                            <input type="hidden" value="'. $productpaymentlength["price"] .'" name="newprice" required>
+                            <input type="hidden" value="'. $order_result["price"] .'" name="oldprice" required>
+
+
+                            <input type="hidden" value="'. $dateofactivation .'" name="startdate" required>
+                            <input type="hidden" value="'. $enddate .'" name="enddate" required>
+                            <input type="hidden" value="'. $newstartdate .'" name="newstartdate" required>
+
+
+                            <input type="hidden" value="'. $order_result["orderno"] .'" name="lngorderno" required>
+                            <input type="hidden" value="'.$order_result["pqty"]  . '" name="qty" required>
+                            <input type="textarea" row="4" value="'. $sms .'" name="sms" readOnly required>
+                            <input type="text" value="" name="comment" placeholder="Please report effort on personal notification through call,sms or what is successful or not" required>
+
+                            
+                        <input type="submit" value="Unblock Account">
+                        </div>
+                    </form>
+                </div>            
+            ';
+
+
+
+
+
+
+
+             }else{
+                echo "ACCOUNT NOT BLOCKED";
+             }
+                
+             
+         ?>
+         
+         
          
          <?php
             echo "</div>";
          ?>    
 
+
+
+
+
         <?php 
          echo '<div id="div_allocation">'; 
-       //  print_r($this->orderdetails);
-        // echo "<pre>";
-        // print_r($this->attributedpayments);
-        // $order_result=$this->orderdetails;
+       
          ?>  
          
-                        
+                   Allocation section     
          
          <?php
             echo "</div>";
          ?>    
+
+
+
+
+
+
 
 
         <?php 
@@ -494,9 +608,10 @@ echo '
         // echo "<pre>";
         // print_r($this->attributedpayments);
         // $order_result=$this->orderdetails;
+        echo "Documents";
          ?>  
          
-                        
+                   documenrt desction     
          
          <?php
             echo "</div>";

@@ -27,9 +27,11 @@ class Admcustomeraccount extends Controller{
 
 
         public function managedetails($orderno){
+            
             //echo $orderno;
             $this->view->orderdetails=$this->model->orderdetails($orderno);
             $this->view->attributedpayments=$this->model->attributedpayments($orderno);
+            $this->view->numofmonthlengthforaproduct=$this->model->numofmonthlengthforaproduct($orderno);
             $this->view->render('admcustomeraccount/account'); 
         }
 
@@ -48,6 +50,32 @@ class Admcustomeraccount extends Controller{
             $this->model->transactiondailyreport($data);
             $this->view->render("admcustomeraccount/index");
 
+        }
+
+        public function unblockreport(){
+            $data=array();
+            $data['mobile']=$_POST['mobile'];
+            $data['qty']=$_POST['qty'];
+            $data['orderno']=$_POST['orderno'];
+            $data['lngorderno']=$_POST['lngorderno'];
+            $data['oldprice']=$_POST['oldprice'];
+            $data['newprice']=$_POST['newprice'];
+            
+            $data['startdate']=$_POST['startdate'];
+            $data['enddate']=$_POST['enddate'];
+            $data['newstartdate']=$_POST['newstartdate'];
+
+            $data['sms']=$_POST['sms'];
+            $data['reportedby']=session::get("currentuser");
+            $data['branchid']=session::get("branch");
+            $data['comment']=$_POST['comment'];
+            
+           
+            
+           // echo "<pre>";
+           // print_r($data); 
+            $this->model->unblockreport($data);
+            $this->view->render("admcustomeraccount/index"); 
         }
 
 
