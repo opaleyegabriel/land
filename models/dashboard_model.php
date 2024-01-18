@@ -530,7 +530,7 @@ public function all_ind_products(){
 
 
 
-        $sth=$this->db->prepare("SELECT DISTINCT tbl_orders.pid,tbl_orders.pname,tbl_orders.pqty,tbl_orders.price,tbl_orders.mobile,tbl_payments.orderno FROM tbl_orders INNER JOIN tbl_payments ON tbl_orders.orderno=tbl_payments.refid WHERE 
+        $sth=$this->db->prepare("SELECT DISTINCT tbl_orders.created_at,tbl_orders.pid,tbl_orders.pname,tbl_orders.pqty,tbl_orders.price,tbl_orders.mobile,tbl_payments.orderno FROM tbl_orders INNER JOIN tbl_payments ON tbl_orders.orderno=tbl_payments.refid WHERE 
 
             tbl_payments.mobile=:mobile AND tbl_orders.paid='Y'
 
@@ -577,6 +577,7 @@ public function all_ind_products(){
                 $totalamount=$price * $qty;
 
                 $orderno=$value['orderno'];
+                $date_created=$value['created_at'];
 
                 //get amount paid
 
@@ -666,7 +667,7 @@ public function all_ind_products(){
 
                 //$sthinsert=$this->db->prepare("INSERT INTO temp_billings(mobile,orderno,pid,pname,qty,price,totalamount,amountpaid,due) VALUES(:m,:o,:id,:p,:q,:price,:totamt,:amtpaid,:due)");
 
-                $sthinsert=$this->db->prepare("INSERT INTO temp_billings(mobile,orderno,pid,pname,qty,price,totalamt,amountpaid,due,allocation) VALUES(:m,:o,:id,:p,:qty,:price,:tamt,:amtp,:d,:al)");
+                $sthinsert=$this->db->prepare("INSERT INTO temp_billings(mobile,orderno,pid,pname,qty,price,totalamt,amountpaid,due,allocation,order_date) VALUES(:m,:o,:id,:p,:qty,:price,:tamt,:amtp,:d,:al,:ordd)");
 
                 $sthinsert->execute(array(
 
@@ -688,7 +689,8 @@ public function all_ind_products(){
 
                     ':d'=>$Amountdue,
 
-                    ':al'=>$alks
+                    ':al'=>$alks,
+                    ':ordd'=>$date_created
 
                     ));
 

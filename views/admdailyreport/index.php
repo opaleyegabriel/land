@@ -34,6 +34,7 @@ $branch=session::get("branch");
 ?>
 
 
+  
 <div id="wrapper">
 
 <!-- Header -->
@@ -330,6 +331,7 @@ echo '
 
 
 
+
             <!-- sidebar overly for mobile -->
             <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
 
@@ -339,127 +341,89 @@ echo '
         <div class="main_content">
             <div class="mcontainer">
 
-
-
-
-
-
-
-                <div class="lg:flex lg:space-x-12">
-
-                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
-
-                      
-                      <h2 class="text-xl font-semibold mt-7"> Site Visit Request </h2>
-                      <div class="card">
-                      <form enctype="multipart/form-data" action="<?php echo URL."svrequest/newrequest" ?>" method="post" >                       
-                          <div class="card-body">                                      
-                            
-                                
-                                <input type="text" name="site" value="" class="with-border"  placeholder="Visit" required> 
-                                <input type="text" name="purpose" value="" class="with-border"  placeholder="Purpose" required> 
-                                <input type="Number" name="amount" value="" class="with-border"  placeholder="transport Cost" required>
-                                <input type="submit" value="Request Now">
-                                
-
-                          </div></form>
-
-
-
-                          </div>
-
+                      <?php 
+         echo '<div id="div_acctdetails">'; 
+       
+         //$order_result=$this->orderdetails;
+         ?>  
          
-
-
-
-                       
+         
+                     <h2 class="text-xl font-semibold mt-7"> Daily Client Account History for  </h2>
+                    <table class="table table-striped table-dark">
+                        <thead>
+                    <tr><td scope="col" align="center">Serial No</td>                    
+                        <td scope="col" align="center">Client Name</td>
+                        <td scope="col" align="center"> Mobile </td> 
+                        <td scope="col" align="center">Balance</td>   
+                        <td scope="col" align="center">Account Up To Date</td>    
+                        <td scope="col" align="center">Your Action</td>                   
+                                           
                       
-
-                    </div>
-
-                </div>
-                 <h2 class="text-xl font-semibold mt-7"> List of Site Visit Request </h2>
-                <table class="table table-striped table-dark">
-                    <thead>
-                <tr>
-                    <td>s/n</td>
-                    
-                    <td scope="col" align="center">Site</td>                    
-                    <td scope="col" align="center">Amount</td>
-                    <td scope="col" align="center">Status</td>                      
-                    <td scope="col" align="center">Feedback</td>                      
-                </tr>
-                </thead>
-            <tbody>
-            </tbody>
-                <?php
-                    //print_r($this->requestlist);
+                    </tr>
+                    </thead>
+                    <tbody>
                 
-                $sn=1;
-                
-                foreach ($this->requestlist as $key => $value) {
-                    # code...
-                    echo'
-                        <tr>
-                            <td scope="col" align="left">'. $sn .'</td>
-                            <td scope="col" align="left">'. $value["site"] .'</td>
-                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
-                            <td scope="col" align="left">'. $value["vstatus"] .'</td>
-                            <td scope="col"><a href='. URL ."svrequest/feedback/". $value["id"] .'><input type="button" value="FeedBACK"></a></td>;
-                        </tr>
+                                <?php
+                                   print_r($this->dailyclientaccounthistory);
+                                        //SELECT DISTINCT a.balance,a.uptodate,a.comment,a.mobile,b.name  FROM tbl_dailyhistory a, tbl_profile b WHERE a.mobile=b.phone;      
+                                    $sn=1;
+                                //$n="YES";
+                                //echo date_format($date,"Y/m/d H:i:s");
+                                $amount=0;
+                                foreach ($this->dailyclientaccounthistory as $key => $value) {
+                                    # code...
+                                    
+                                    
+                                    echo'
+                                        <tr>
+                                        <td scope="col" align="left">'. $sn .'</td>
+                                            <td scope="col"  align="left">'. $value["name"] .'</td>
+                                            <td scope="col" align="left">'.$value['mobile'].'</td>
+                                            <td scope="col" align="right">'. number_format($value['balance']).'</td> 
+                                            <td scope="col" align="left">'.$value['uptodate'].'</td>
+                                            <td scope="col" align="left">'.$value['comment'].'</td>
+                                        </tr>
+
+                                    ';
+                                    $sn++;
+                                }
+                                
+                                                              
+                                ?>
+                                </tbody>
+                               
+                        </table>
+
+                        
+                        
+         <?php
+            echo "</div>";
+         ?>    
 
 
-                    ';
-                    $sn++;
-                }
-                
-                ?>
-           </table>
-                 
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
-
-
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("July 16, 2022 00:00:00").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
+                                     
     
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
-
-
-
-
-
-
-
-
 
 
 

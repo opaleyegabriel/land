@@ -557,7 +557,7 @@ session::set('adon',false);
 
 
 
-                            $date=($this->dateofcontractactivation['created_at']);
+                            $date=($value['order_date']);
 
                             //$date1= date('Y-m-d H:i:s',strtotime('+1 month',strtotime($date)));
 
@@ -609,7 +609,7 @@ session::set('adon',false);
 
                                     {
 
-                                        echo '<p>Contract Activated on:'. date('d-m-Y',strtotime($this->dateofcontractactivation['created_at'])) . '</p>';
+                                        echo '<p>Contract Activated on:'. date('d-m-Y',strtotime($value['order_date'])) . '</p>';
                                         echo '<p>Contract Expire on:'. date('d-m-Y',strtotime($newendmonth)). ' </p>';
                                    
 
@@ -627,7 +627,7 @@ session::set('adon',false);
 
                                     echo "<br/>";
 
-                                    echo '<p>Contract Activated on:'. date('d-m-Y',strtotime($this->dateofcontractactivation['created_at'])) . '</p>';
+                                    echo '<p>Contract Activated on:'. date('d-m-Y',strtotime($value['order_date'])) . '</p>';
                                     echo '<p>Contract Expired on:'. date('d-m-Y',strtotime($newendmonth)). ' </p>';
                                    
                                        
