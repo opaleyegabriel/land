@@ -16,6 +16,15 @@
 
           <link href="<?php echo URL; ?>public/images/favicon.png" rel="icon" type="image/png">
 
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+         
+          <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
+
+
+
     <script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-1.11.3.min.js"></script>
     <?php
     if (isset($this->js))
@@ -39,6 +48,18 @@
 
 
 
+
+
+
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 
 
 </head>

@@ -64,7 +64,24 @@ class Admcustomeraccount_model extends Model {
        
       echo </script>'; 
     }
+    public function dailyhistory($orderno){
 
+        $search=$this->db->prepare("SELECT * FROM tbl_payments WHERE refid=:refid order by id limit 1");
+        $search->execute(array(
+            ':refid'=>$orderno
+        ));
+        $result=$search->fetch();
+        //print_r($result);
+        //exit;
+        if($result){
+            $sth=$this->db->prepare("SELECT * FROM tbl_dailyhistory WHERE orderno =:orderno ORDER BY id DESC LIMIT 2");
+            $sth->execute(array(
+                 ':orderno'=>$result['orderno']
+            ));
+            return $sth->fetchAll();
+
+        }
+    }
     public function transactiondailyreport($data){
         $insert=$this->db->prepare("INSERT INTO tbl_dailyhistory(balance,uptodate,comment,comment2,mobile,orderno,reportby,branchid)
          VALUES(:b,:upd,:co1,:co2,:mobile,:orderno,:rptby,:branchid)");

@@ -271,7 +271,7 @@ echo '
 ?>    
 
 <?php
-if((Session::get('usertype')==2) || (Session::get('usertype')==0)){
+if((Session::get('usertype')==1)){
 echo '
 <li><a href="'.URL."admdailyreport".'">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
@@ -341,7 +341,17 @@ echo '
         <div class="main_content">
             <div class="mcontainer">
 
-                      <?php 
+
+            
+            <label>Select a Branch</label>
+                <select name="branch" id="branch">
+                    <option value="1">Ilorin Branch</option>
+                    <option value="2">Osogbo Branch</option>
+                    <option value="3">Ibadan Branch</option>
+                </select>
+            <p>Date: <input type="text" id="datepicker" onchange="getReportList()"></p>
+
+        <?php 
          echo '<div id="div_acctdetails">'; 
        
          //$order_result=$this->orderdetails;
@@ -364,6 +374,7 @@ echo '
                     <tbody>
                 
                                 <?php
+                                /*
                                    print_r($this->dailyclientaccounthistory);
                                         //SELECT DISTINCT a.balance,a.uptodate,a.comment,a.mobile,b.name  FROM tbl_dailyhistory a, tbl_profile b WHERE a.mobile=b.phone;      
                                     $sn=1;
@@ -371,8 +382,6 @@ echo '
                                 //echo date_format($date,"Y/m/d H:i:s");
                                 $amount=0;
                                 foreach ($this->dailyclientaccounthistory as $key => $value) {
-                                    # code...
-                                    
                                     
                                     echo'
                                         <tr>
@@ -388,7 +397,7 @@ echo '
                                     $sn++;
                                 }
                                 
-                                                              
+                                      */                        
                                 ?>
                                 </tbody>
                                
@@ -425,5 +434,31 @@ echo '
                                      
     
 
+    <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
 
+
+
+
+  function getReportList(){
+    currentselecteddate=document.getElementById("datepicker").value;
+                         $.post("admdailyreport/selectedreport",
+	                        // {staffid(in database):sid(variable here)etc},
+	                        {mobile:mobile,orderno:orderno,refid:refid,product:product,qty:qty,price:price,debit:debit,credit:credit},
+	                        function (data) {
+	                          alert(data.message);
+	                          var delay=2000;
+	                          setTimeout(function(){
+	       						 window.location.href = "https://dreamcityhes.com/land/dashboard";
+	       						 //window.location.href = "http://localhost:8080/land/dashboard";
+	            			},delay)
+
+
+
+	                      },'json'
+	                      );
+}
+  </script>
 

@@ -241,7 +241,7 @@ echo '
 ?>    
 
 <?php
-if((Session::get('usertype')==2) || (Session::get('usertype')==0)){
+if((Session::get('usertype')==1)){
 echo '
 <li><a href="'.URL."admdailyreport".'">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">

@@ -19,7 +19,7 @@ class Admdailyreport extends Controller{
             }
             
             function index(){ 
-                $this->view->dailyclientaccounthistory=$this->model->dailyclientaccounthistory();                  
+              //  $this->view->dailyclientaccounthistory=$this->model->dailyclientaccounthistory();                  
                   $this->view->render('admdailyreport/index');
 
             }

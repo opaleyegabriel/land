@@ -271,7 +271,7 @@ echo '
 ?>    
 
 <?php
-if((Session::get('usertype')==2) || (Session::get('usertype')==0)){
+if((Session::get('usertype')==1)){
 echo '
 <li><a href="'.URL."admdailyreport".'">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
@@ -340,7 +340,7 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-
+                  
                       <table>
                         <tr>
                             
@@ -354,9 +354,27 @@ echo '
     
          
 
-                      <?php 
+    <?php 
+
          echo '<div id="div_acctdetails">'; 
-       
+                // print_r($this->dailyhistory);
+                    //check if daily report is available in the past, last two daily report
+                    if(!empty($this->dailyhistory)){
+                        echo "<h1>Report Latest History</h1>";
+                        foreach ($this->dailyhistory as $key => $value) {
+                            echo '
+                            
+                                <div><p>Reported on : '. $value['created_at'] .'</p>
+                                <p>Up-to-date?? : '. $value['uptodate'] .'</p>
+                                <p>Report : '. $value['comments'] .'</p>
+                                <p>What you did : '. $value['comment'] .'</p>
+                                </div>
+                                ................................................................
+                            
+                            ';
+                            }
+                    }
+                  
          $order_result=$this->orderdetails;
          ?>  
          

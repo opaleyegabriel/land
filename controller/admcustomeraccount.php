@@ -29,6 +29,7 @@ class Admcustomeraccount extends Controller{
         public function managedetails($orderno){
             
             //echo $orderno;
+            $this->view->dailyhistory=$this->model->dailyhistory($orderno);
             $this->view->orderdetails=$this->model->orderdetails($orderno);
             $this->view->attributedpayments=$this->model->attributedpayments($orderno);
             $this->view->numofmonthlengthforaproduct=$this->model->numofmonthlengthforaproduct($orderno);
