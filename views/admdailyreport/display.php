@@ -340,23 +340,15 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-    <div align="center">
-        <form method="POST" action="<?php echo URL?>admdailyreport/display">
-            <div name="snackbar" id="snackbar" class="snackbar"></div>
-            <label>Pick a Branch:</label>
-                <select name="branch" id="branch" name="branch">
-                    <option value="1">Ilorin Branch</option>
-                    <option value="2">Osogbo Branch</option>
-                    <option value="3">Ibadan Branch</option>
-                </select>
-            <p>Select Report Date: <input type="text" id="datepicker" name="datepicker" onchange="getReportList()"></p>
-            <input type="submit" value="Display Report">
-            <form>
-</div>
+
         <?php 
          echo '<div id="div_acctdetails">'; 
        
          //$order_result=$this->orderdetails;
+         //echo "<pre>";
+        // print_r($this->displayrecord);
+         
+
          ?>  
          
          
@@ -368,9 +360,7 @@ echo '
                         <td scope="col" align="center"> Balance </td> 
                         <td scope="col" align="center">Mobile</td>   
                         <td scope="col" align="center">Account Up To Date</td>    
-                        <td scope="col" align="center">View</td>                   
-                                           
-                      
+                        <td scope="col" align="center">View</td>                      
                     </tr>
                     </thead>
                     <tfoot id="tfootid">
@@ -381,15 +371,17 @@ echo '
                     </tfoot>
                     <tbody id="tbodyid">
                                         <?php
-                                        //  foreach ($myrecords as $Key => $Value) {
-                                        //    echo '<tr>
-                                        //<td>'.$Value['mainid'].'</td><td>'.$Value['subid'].'</td><td>'.$Value['subclassid'].'</td><td>'.$Value['description'].'</td></tr>';
-                                        //}
+
+                                         foreach ($this->displayrecord as $Key => $Value) {
+                                            $id=$Value['id'];
+                                            echo '<tr>
+                                                    <td>'. $key++ .'</td><td>'.$Value['reportby'].'</td><td>'.$Value['balance'].'</td><td>'.$Value['mobile'].'</td><td>'.$Value['uptodate'].'</td><td><a href='. URL.'admdailyreport/displayinfor/'. $id .'><button style="color:blue"> View Report</button></a></td>
+                                                </tr>';
+                                        
+                                        }
 
 
                                         ?>
-
-
 
                     </tbody>
                                
@@ -407,10 +399,3 @@ echo '
     </div>
                                      
     
-
-    <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );    
-  </script>
-

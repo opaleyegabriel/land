@@ -24,4 +24,17 @@ class Admdailyreport_model extends Model {
 
     return $sth->fetchAll();
     }
+
+    public function display($data){
+        $dd=date('Y-m-d', strtotime($data['datepicker'])) ."%";
+        //print_r($dd);
+        //exit;
+        
+        $sth=$this->db->prepare("SELECT * FROM tbl_dailyhistory WHERE branchid=:br AND created_at like :cat");
+        $sth->execute(array(
+            ':br'=>$data['branch'],
+            ':cat'=>$dd
+        ));
+        return $sth->fetchAll();
+    }
 }

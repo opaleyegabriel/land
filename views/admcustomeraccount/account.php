@@ -340,13 +340,21 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-                  
+                  <div>
+                    <h1>
+                    <?php
+                        echo $this->nameofclient['name'];
+                        echo $this->nameofclient['phone'];
+                    ?>
+                    </h1>
+                  </div>
                       <table>
                         <tr>
                             
                             <td><input type="button" value="Account Details" id="acctdetails"></td>
                             <td><input type="button" value="Unblock Account" id="unblock"></td>
                             <td><input type="button" value="Allocation" id="allocation"></td>
+                            <td><input type="button" value="Beacons" id="beacon"></td>
                             <td><input type="button" value="Documentation" id="documents"></td>
                         </tr>
                         
@@ -357,17 +365,17 @@ echo '
     <?php 
 
          echo '<div id="div_acctdetails">'; 
-                // print_r($this->dailyhistory);
+                //print_r($this->dailyhistory);
                     //check if daily report is available in the past, last two daily report
                     if(!empty($this->dailyhistory)){
                         echo "<h1>Report Latest History</h1>";
                         foreach ($this->dailyhistory as $key => $value) {
                             echo '
                             
-                                <div><p>Reported on : '. $value['created_at'] .'</p>
-                                <p>Up-to-date?? : '. $value['uptodate'] .'</p>
-                                <p>Report : '. $value['comments'] .'</p>
-                                <p>What you did : '. $value['comment'] .'</p>
+                                <div><p>Reported on : '. $value["created_at"] .'</p>
+                                <p>Up-to-date?? : '. $value["uptodate"] .'</p>
+                                <p>Report : '. $value["comment2"] .'</p>
+                                <p>What you did : '. $value["comment"] .'</p>
                                 </div>
                                 ................................................................
                             
@@ -618,6 +626,24 @@ echo '
 
 
 
+        <?php 
+         echo '<div id="div_beacon">'; 
+       //  print_r($this->orderdetails);
+        // echo "<pre>";
+        // print_r($this->attributedpayments);
+        // $order_result=$this->orderdetails;
+       
+         ?>  
+         
+                   Beacon Section
+         <?php
+            echo "</div>";
+         ?>    
+
+
+
+
+
 
 
         <?php 
@@ -626,10 +652,10 @@ echo '
         // echo "<pre>";
         // print_r($this->attributedpayments);
         // $order_result=$this->orderdetails;
-        echo "Documents";
+       
          ?>  
          
-                   documenrt desction     
+                   Document desction     
          
          <?php
             echo "</div>";

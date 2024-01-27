@@ -23,4 +23,18 @@ class Admdailyreport extends Controller{
                   $this->view->render('admdailyreport/index');
 
             }
+
+            public function display(){
+                $data=array();
+                $data['branch']=$_POST['branch'];
+                $data['datepicker']=$_POST['datepicker'];
+                //echo "<pre>";
+                //print_r($data);
+                
+                $this->view->displayrecord=$this->model->display($data);
+                $this->view->render('admdailyreport/display');
+            }
+            public function displayinfor($id){
+                echo $id;
+            }
 }

@@ -11,7 +11,14 @@ class Admcustomeraccount_model extends Model {
         session::init();
 
     }
-
+    public function nameofclient($orderno){
+        $sth=$this->db->prepare("SELECT * FROM tbl_profile a INNER JOIN tbl_orders b ON b.mobile=a.phone WHERE b.orderno=:orderno AND b.paid='Y'");
+        $sth->execute(array(
+            ':orderno'=>$orderno
+        ));
+        return $sth->fetch();
+        
+    }
 
     public function unblockreport($data) {
         //tbl_blockedaccountreport
@@ -120,16 +127,18 @@ class Admcustomeraccount_model extends Model {
         }
     }
     public function attributedpayments($orderno){
+       /*
         $order= $orderno .'%';
-        $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno like :orderno AND paid=:p");
-        $sth->execute(array(
+        $sth1=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno like :orderno AND paid=:p");
+        $sth1->execute(array(
             ':orderno'=>$order,
             ':p'=>'Y'
         ));
 
-        $result= $sth->fetch();
+        $result= $sth1->fetch();
         if($result){
             //get payment details
+            /*
             $finalorderno=substr($result['orderno'],12);
             $select=$this->db->prepare("SELECT DISTINCT a.created_at,a.mobile,a.orderno,a.debit,a.credit,a.refid FROM tbl_payments a where a.orderno=:orderno;");
             $select->execute(array(
@@ -138,7 +147,22 @@ class Admcustomeraccount_model extends Model {
             ));
 
             return $select->fetchAll();
-        } 
+        }
+            */
+        
+           // $mobile=$result['mobile'];
+        $sth=$this->db->prepare("SELECT tbl_orders.created_at,tbl_orders.pid,tbl_orders.pname,tbl_orders.pqty,tbl_orders.price,tbl_orders.mobile,tbl_payments.credit, tbl_payments.orderno FROM tbl_payments INNER JOIN tbl_orders ON tbl_orders.mobile=tbl_payments.mobile WHERE tbl_orders.orderno=:order AND tbl_orders.paid='Y';");
+
+            $sth->setFetchMode(PDO::FETCH_ASSOC);
+
+            $sth->execute(array(
+
+                ':order'=>$orderno
+               // ':mobile'=>$mobile
+             ));
+            return $sth->fetchAll();
+
+        
     }
     public function orderdetails($orderno){
         $order= $orderno .'%';
