@@ -35,8 +35,9 @@ class Admcustomeraccount extends Controller{
             $this->view->attributedpayments=$this->model->attributedpayments($orderno);
             $this->view->nameofclient=$this->model->nameofclient($orderno);
             $this->view->numofmonthlengthforaproduct=$this->model->numofmonthlengthforaproduct($orderno);
+            $this->view->blocks_list=$this->model->blocks_list($orderno);
+            $this->view->plot_list=$this->model->plot_list($orderno);
             $this->view->render('admcustomeraccount/account'); 
-            
         }
 
         public function transactiondailyreport(){

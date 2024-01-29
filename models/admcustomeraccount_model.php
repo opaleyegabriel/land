@@ -11,6 +11,46 @@ class Admcustomeraccount_model extends Model {
         session::init();
 
     }
+
+
+    public function plot_list($orderno){
+        $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno=:orderno");
+        $sth->execute(array(
+            ':orderno'=>$orderno
+        ));
+        $result=$sth->fetch();
+        //print_r($result);
+        //exit();
+        if($result){
+            $pid=$result['pid'];
+            $select=$this->db->prepare("SELECT DISTINCT pid,plot FROM tbl_sitelayout_allocation WHERE pid=:pid AND mobile=:mobile");
+             $select->execute(array(
+            ':pid'=>$pid,
+            ':mobile'=>"N"
+            ));
+            return $select->fetchAll();
+        }
+
+    }
+    public function blocks_list($orderno){
+        //select product id(pid)
+        $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno=:orderno");
+        $sth->execute(array(
+            ':orderno'=>$orderno
+        ));
+        $result=$sth->fetch();
+        //print_r($result);
+        //exit();
+        if($result){
+            $pid=$result['pid'];
+            $select=$this->db->prepare("SELECT DISTINCT pid,blockaddress FROM tbl_sitelayout_allocation WHERE pid=:pid");
+             $select->execute(array(
+            ':pid'=>$pid
+            ));
+            return $select->fetchAll();
+        }
+        
+    }
     public function nameofclient($orderno){
         $sth=$this->db->prepare("SELECT * FROM tbl_profile a INNER JOIN tbl_orders b ON b.mobile=a.phone WHERE b.orderno=:orderno AND b.paid='Y'");
         $sth->execute(array(
@@ -53,7 +93,7 @@ class Admcustomeraccount_model extends Model {
         $pay->execute(array(
             ':newprice'=>$nprice,
             ':srtorderno'=>$data['orderno'],
-            ':mobile'=>$data['mobile'],
+            ':mobile'=>$data['mobile']
 
         ));
         //3. tbl_debt
@@ -62,7 +102,7 @@ class Admcustomeraccount_model extends Model {
         $debt->execute(array(
             ':newprice'=>$nprice,
             ':srtorderno'=>$data['orderno'],
-            ':mobile'=>$data['mobile'],
+            ':mobile'=>$data['mobile']
             
         ));
 
@@ -161,9 +201,8 @@ class Admcustomeraccount_model extends Model {
                // ':mobile'=>$mobile
              ));
             return $sth->fetchAll();
-
+        }
         
-    }
     public function orderdetails($orderno){
         $order= $orderno .'%';
         $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno like :orderno AND paid=:p");

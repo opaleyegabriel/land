@@ -612,10 +612,50 @@ echo '
 
         <?php 
          echo '<div id="div_allocation">'; 
-       
+       //SELECT * FROM `tbl_debt` WHERE mobile='09063536040'
+            //print_r($this->blocks_list);
+           // print_r($this->attributedpayments);
+           foreach ($this->attributedpayments as $key => $value) {
+            $pid_=$value['pid'];
+            $pqty_=$value['pqty'];
+            # code...
+           }
+           print_r($this->plot_list);
          ?>  
-         
-                   Allocation section     
+
+                      
+                <h2 class="text-xl font-semibold mt-7"> Allocation for the land Details Below </h2>
+                    <div class="card">
+                    <form enctype="multipart/form-data" action="'.URL.'admcustomeraccount/unblockreport" method="post" >                      
+                    <div class="card-body">
+                            <input type="text" name="pid" value="<?php echo $pid_; ?>"  readOnly>
+                            <input type="text" name="qty" value="<?php echo $pqty_; ?>" readOnly>
+                    
+                        <select name="blocks_list" id="blocks_list">
+                            <option value disable selected> Select Block</option>
+                            <?php
+                                foreach ($this->blocks_list as $key => $value) {
+                            ?>
+                            <option value="<?php echo $value["blockaddress"]; ?>"><?php echo $value["blockaddress"];?></option>
+                            
+                             <?php }
+                            ?>
+                        </select>
+                   
+                        <select name="plot_list" id="plot_list">
+                            <option value disable selected> Select Plot</option>
+                            <?php
+                                foreach ($this->plot_list as $key => $value) {
+                            ?>
+                            <option value="<?php echo $value["plot"]; ?>"><?php echo $value["plot"];?></option>
+                             <?php }
+                            ?>
+                        </select>
+                   
+            </div>
+                    </form>
+                    
+            
          
          <?php
             echo "</div>";
