@@ -26,7 +26,8 @@ class Dashboard extends Controller{
             $this->view->allitems=$this->model->allitems();
             $this->view->myrewards=$this->model->myrewards();
             $this->view->allmyproducts=$this->model->all_ind_products(); 
-                       
+            $this->view->allocated=$this->model->allocated();
+            $this->view->acctofficer=$this->model->acctofficer();     
             $this->view->render('dashboard/index');
 
         }

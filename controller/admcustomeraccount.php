@@ -25,7 +25,30 @@ class Admcustomeraccount extends Controller{
             $this->view->render('admcustomeraccount/manage'); 
         }
 
+        public function allocate(){
+            $data=array();
+            $data['pid']=$_POST['pid'];
+            $data['orderno']=$_POST['allocation_orderno'];
+            $data['mobile']=$_POST["mobile"];
+            $data['qty']=$_POST['qty'];
+            $data['blocks_list']=$_POST['blocks_list'];
+            $data['plot_list']=$_POST['plot_list'];
+            $data['allocatedcount']=$_POST['allocatedcount'];
+            if($data['allocatedcount'] < $data['qty']){
+            $this->model->allocate($data);
+            header('location: '. URL . 'admcustomeraccount/managedetails/'.$data['orderno']);
+           // $this->view->render('admcustomeraccount/managedetails/'.$data['orderno']);
+            }else{
+                $newurl= URL.'admcustomeraccount/managedetails/'.$data['orderno'];
+                echo '<script type="text/javascript">';
+			            echo 'alert("You can not allocate more than number of plot acquired");
+			            window.location.href = "'.$newurl.'"';
+			          echo "</script>";
 
+            }
+            
+            
+        }
         public function managedetails($orderno){
             
             //echo $orderno;
@@ -37,6 +60,8 @@ class Admcustomeraccount extends Controller{
             $this->view->numofmonthlengthforaproduct=$this->model->numofmonthlengthforaproduct($orderno);
             $this->view->blocks_list=$this->model->blocks_list($orderno);
             $this->view->plot_list=$this->model->plot_list($orderno);
+            $this->view->pastallocated=$this->model->pastallocated($orderno);
+            $this->view->allocated=$this->model->allocated($orderno);
             $this->view->render('admcustomeraccount/account'); 
         }
 

@@ -11,8 +11,32 @@ class Admcustomeraccount_model extends Model {
         session::init();
 
     }
-
-
+    public function allocated($orderno){
+        $sth=$this->db->prepare("SELECT * FROM tbl_sitelayout_allocation INNER JOIN tbl_products ON tbl_sitelayout_allocation.pid=tbl_products.id WHERE orderno=:orderno");
+        $sth->execute(array(
+            ':orderno'=>$orderno
+        ));
+        return $sth->fetchAll();
+    }
+    public function allocate($data){
+        $update=$this->db->prepare("UPDATE tbl_sitelayout_allocation SET nstatus=:initiated, allocatedby=:cuser,orderno=:orderno,mobile=:mobile WHERE blockaddress=:bad AND plot=:plt AND pid=:pid");
+        $update->execute(array(
+            ':initiated'=>'I',
+            ':cuser'=>session::get("currentuser"),
+            ':orderno'=>$data['orderno'],
+            ':mobile'=>$data['mobile'],
+            ':bad'=>$data['blocks_list'],
+            ':plt'=>$data['plot_list'],
+            ':pid'=>$data['pid']
+        ));
+    }
+    public function pastallocated($orderno){
+        $sth=$this->db->prepare("SELECT COUNT(*) AS totNum FROM tbl_sitelayout_allocation WHERE orderno=:orderno");
+        $sth->execute(array(
+            ':orderno'=>$orderno
+        ));
+        return $sth->fetch();
+    }
     public function plot_list($orderno){
         $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE orderno=:orderno");
         $sth->execute(array(

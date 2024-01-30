@@ -618,44 +618,90 @@ echo '
            foreach ($this->attributedpayments as $key => $value) {
             $pid_=$value['pid'];
             $pqty_=$value['pqty'];
+            $mobile_=$value['mobile'];
+            
             # code...
            }
-           print_r($this->plot_list);
+        
          ?>  
 
-                      
-                <h2 class="text-xl font-semibold mt-7"> Allocation for the land Details Below </h2>
+            <?php 
+              // print_r($this->plot_list);
+                $order_result=$this->orderdetails;
+                $pa=$this->pastallocated['totNum'];
+                //check if allocation is completely done
+                if(number_format($pqty_) >  number_format($pa)  ){
+                    echo '
+                    <h2 class="text-xl font-semibold mt-7"> Allocation for the land Details Below </h2>
                     <div class="card">
-                    <form enctype="multipart/form-data" action="'.URL.'admcustomeraccount/unblockreport" method="post" >                      
+                    <form enctype="multipart/form-data" action="'.URL.'admcustomeraccount/allocate" method="post" >                      
                     <div class="card-body">
-                            <input type="text" name="pid" value="<?php echo $pid_; ?>"  readOnly>
-                            <input type="text" name="qty" value="<?php echo $pqty_; ?>" readOnly>
-                    
-                        <select name="blocks_list" id="blocks_list">
-                            <option value disable selected> Select Block</option>
-                            <?php
-                                foreach ($this->blocks_list as $key => $value) {
-                            ?>
-                            <option value="<?php echo $value["blockaddress"]; ?>"><?php echo $value["blockaddress"];?></option>
+                            <input type="hidden" name="pid" value="'. $pid_.'"  readOnly required>
+                            <Input type="hidden" name="mobile" value="'.$mobile_.'" readOnly required>
+                            <input type="text" name="allocatedcount" value="'.$pa.'" readOnly required>
+                            <input type="text" name="allocation_orderno" value="'.$order_result['orderno'].'"  readOnly required>
+                            <label>QTY</label>
+                            <input type="text" name="qty" value="'.$pqty_.'" readOnly required>
+                        <label>BLOCK </label>
+                        <select name="blocks_list" id="blocks_list" required>
+                            <option value disable selected> Select Block</option>';
                             
-                             <?php }
-                            ?>
-                        </select>
-                   
-                        <select name="plot_list" id="plot_list">
-                            <option value disable selected> Select Plot</option>
-                            <?php
+                                foreach ($this->blocks_list as $key => $value) {
+                            
+                                   echo '<option value="'. $value["blockaddress"] .'">'.$value["blockaddress"].'</option>';
+                            
+                                }
+                        echo '</select>
+                        <Label>PLOT</label>
+                        <select name="plot_list" id="plot_list" required>
+                            <option value disable selected> Select Plot</option>';
+                            
                                 foreach ($this->plot_list as $key => $value) {
-                            ?>
-                            <option value="<?php echo $value["plot"]; ?>"><?php echo $value["plot"];?></option>
-                             <?php }
-                            ?>
-                        </select>
+                        
+                            echo '<option value="'.$value["plot"].'">'.$value["plot"].'</option>';
+                                }
+                            
+                       echo '</select>
                    
-            </div>
-                    </form>
+                        </div>
+                                    <input type="submit" value="Submit Allocation for Approval">
+                            </form>
+                                </div>
                     
-            
+                    
+                    
+                    
+                    ';
+                
+                
+                }else{
+                    foreach ($this->allocated as $key => $value) {
+                        $sitename=$value['product_name'];
+                        $block=$value['blockaddress'];
+    
+                    }
+                   echo '<h2 class="text-xl font-semibold mt-7">'. $sitename .'   Block  ('. $block .')    allocated with details below </h2>
+                    <div class="card">
+                    <tr align="center">';
+                    
+                    foreach ($this->allocated as $key1 => $value1) {
+                        echo '
+                            <td>Plot</td>
+                                <td>'. $value1["plot"] .'</td>
+                    
+                    ';
+    
+                    }
+                                        
+                    echo ' 
+                     </tr>    
+                    </div>';
+
+
+                }
+            ?>
+                      
+               
          
          <?php
             echo "</div>";

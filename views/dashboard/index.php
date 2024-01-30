@@ -524,6 +524,7 @@ session::set('adon',false);
                               foreach ($this->allmyproducts as $key => $value) {
 
                                      $balance=$value["totalamt"] - $value["amountpaid"];
+                                     $lngorderno=$value['lngorderno'];
 
                                         for ($randomNumber = mt_rand(1, 10), $i = 1; $i < 10; $i++) {
 
@@ -531,7 +532,7 @@ session::set('adon',false);
 
                                          }
 
-                                         for ($randomNum = mt_rand(1, 10), $i = 1; $i < 10; $i++) {
+                                         for ($randomNum = mt_rand(1, 10), $i = 1; $i <10; $i++) {
 
                                              $randomNum .= mt_rand(0, 4);
 
@@ -544,7 +545,8 @@ session::set('adon',false);
 
                                   echo '
 
-                                  <h2 class="text-xl font-semibold mt-7"> Your Dashboard  </h2>                                    
+                                  <h2 class="text-xl font-semibold mt-7">Dashboard  </h2>                                    
+                                  <h3>Your Account Officer: '. $this->acctofficer["fullname"] .'  Contact :'. $this->acctofficer["mobile"] .'</h3>
                                   <div class="card">
 
                                     <div class="card-body">
@@ -633,11 +635,11 @@ session::set('adon',false);
                                        
                                         echo '<p style=size:10em;>CONTRACT EXPIRED</p>
 
-
+                                        <h2 class="text-xl font-semibold mt-7"> '. $value["pname"] .'  (Temporary Number :) '. $value["qty"]. '  plots( '. $value["allocation"] .' )  </h2>
 
                                         ';
 
-
+                                        
 
                                         echo "<br/>";
                                      }
@@ -654,10 +656,11 @@ session::set('adon',false);
 
 
                             </div>
+                           
 
                                 <div class="container">
 
-                                <h2 class="text-xl font-semibold mt-7"> '. $value["pname"] .'  '. $value["qty"].' plots( '. $value["allocation"] .' )  </h2>
+                                
 
                                     <div class="row">
 
@@ -707,7 +710,40 @@ session::set('adon',false);
 
                                             </div>
 
+                                        </div>';
+                                        //check allocation
+                                        foreach ($this->allocated as $key => $value) {
+                                            $blockadd=$value['blockaddress'];
+                                            $allocation_orderno=$value['orderno'];
+                                        } 
+                                        if($lngorderno == $allocation_orderno){
+                                         echo   '<div class="col-md-3 col-sm-6">
+
+                                        <div class="single-promo promo3">
+                                        
+                                            <i class="fa  fa-building"></i>
+                                           
+
+                                            <p>Allocation <span style="color:Green; size:4em">';
+                                                foreach ($this->allocated as $key => $value) {
+                                                    $blockadd=$value['blockaddress'];
+                                                }
+                                           echo '
+                                           <tr> BLOCK : '. $blockadd;
+                                           
+                                           foreach ($this->allocated as $key => $value) {
+                                                echo '<td> Plot : '.$value["plot"].'</td>';
+                                             }
+                                        
+
+                                        }
+
+                                           
+                                           echo '</tr> </p>
+
                                         </div>
+
+                                    </div>
 
                                         <input type="hidden" id="mobile" name="mobile" value='. session::get('lphone') .' required />
 
