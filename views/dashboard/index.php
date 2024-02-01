@@ -615,7 +615,11 @@ session::set('adon',false);
                                         echo '<p>Contract Expire on:'. date('d-m-Y',strtotime($newendmonth)). ' </p>';
                                    
 
-                                        echo '<p style=size:10em;>Complete your payment on or before contract expired date</p>';
+                                        echo '<p style=size:10em;>Complete your payment on or before contract expired date</p>
+                                        <h2 class="text-xl font-semibold mt-7"> '. $value["pname"] .'  (Temporary Number :) '. $value["qty"]. '  plots( '. $value["allocation"] .' )  </h2>
+                                        
+                                        
+                                        ';
 
 
 
