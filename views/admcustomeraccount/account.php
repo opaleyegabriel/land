@@ -664,7 +664,7 @@ echo '
                        echo '</select>
                    
                         </div>
-                                    <input type="submit" value="Submit Allocation for Approval">
+                                    <input type="submit" value="Update Approved Allocation">
                             </form>
                                 </div>
                     

@@ -7,9 +7,26 @@ class Admassignaccountofficer_model extends Model {
         parent::__construct();
         session::init();
     }
+    public function alllistcompleted(){
+        $sth=$this->db->prepare("SELECT c.orderno as srtorder,a.pid,a.pname,a.price,a.pqty,(a.price* a.pqty) as totalAmt,sum(c.credit) as Amountpaid, 
+        ((a.price* a.pqty)- sum(c.credit)) as balance, a.mobile,a.paid,b.name,a.orderno FROM tbl_orders a, tbl_profile b, tbl_debt c 
+        WHERE c.mobile=a.mobile AND a.mobile=b.phone and a.paid='Y' and (a.pid=1 or a.pid=2 or a.pid=3 or a.pid=4 or a.pid=5 or a.pid=6 or a.pid=7 
+        or a.pid=8 or a.pid=9 or a.pid=10 or a.pid=11 or a.pid=14 or a.pid=22 or a.pid=23 or a.pid=24 or a.pid=25 or a.pid=26 or a.pid=27 or a.pid=28)
+         GROUP by a.orderno;");
+         $sth->execute();        
+        return $sth->fetchAll();
+    }
     public function alllist(){               
         $sth=$this->db->prepare("SELECT DISTINCT a.pid,a.pname,a.price,a.pqty,a.mobile,a.paid,b.name,b.accountofficer FROM tbl_orders a, tbl_profile b WHERE b.accountofficer='' AND a.mobile=b.phone and a.paid='Y' and (a.pid=1 or a.pid=2 or a.pid=3 or a.pid=4 or a.pid=5 or a.pid=6 or a.pid=7 or a.pid=8 or a.pid=9 or a.pid=10 or a.pid=11 or a.pid=14 or a.pid=22 or a.pid=23 or a.pid=24 or a.pid=25 or a.pid=26 or a.pid=27 or a.pid=28)");
          $sth->execute();        
+        return $sth->fetchAll();
+    }
+    public function alllist_osogbo_completed(){
+        $sth=$this->db->prepare("SELECT c.orderno as srtorder,a.pid,a.pname,a.price,a.pqty,(a.price* a.pqty) as totalAmt,sum(c.credit) as Amountpaid, 
+        ((a.price* a.pqty)- sum(c.credit)) as balance, a.mobile,a.paid,b.name,a.orderno FROM tbl_orders a, tbl_profile b, tbl_debt c 
+        WHERE c.mobile=a.mobile AND a.mobile=b.phone and a.paid='Y' and (a.pid=12 or a.pid=13 or a.pid=15 or a.pid=16 or a.pid=17 or a.pid=18) 
+        GROUP by a.orderno;");
+        $sth->execute();
         return $sth->fetchAll();
     }
     public function alllist_osogbo(){
@@ -17,12 +34,20 @@ class Admassignaccountofficer_model extends Model {
         $sth->execute();
         return $sth->fetchAll();
     }
+
+    public function alllist_ibadan_completed(){
+        $sth=$this->db->prepare("SELECT c.orderno as srtorder,a.pid,a.pname,a.price,a.pqty,(a.price* a.pqty) as totalAmt,sum(c.credit) as Amountpaid, 
+        ((a.price* a.pqty)- sum(c.credit)) as balance, a.mobile,a.paid,b.name,a.orderno FROM tbl_orders a, tbl_profile b, tbl_debt c 
+        WHERE c.mobile=a.mobile AND a.mobile=b.phone and a.paid='Y' and (a.pid=19 or a.pid=20 or a.pid=21) GROUP by a.orderno;");
+        $sth->execute();
+        return $sth->fetchAll();
+    }    
     public function alllist_ibadan(){
         $sth=$this->db->prepare("SELECT DISTINCT a.pid,a.pname,a.price,a.pqty,a.mobile,a.paid,b.name,b.accountofficer FROM `tbl_orders` a, tbl_profile b WHERE b.accountofficer='' AND a.mobile=b.phone and a.paid='Y' and (a.pid=19 or a.pid=20 or a.pid=21);");
         $sth->execute();
         return $sth->fetchAll();
     }
-
+    
     public function selectclient($mobile){
         $sth=$this->db->prepare("SELECT * FROM tbl_profile WHERE phone=:mobile");
         $sth->execute(array(

@@ -346,47 +346,53 @@ echo '
        
          //$order_result=$this->orderdetails;
          //echo "<pre>";
-        // print_r($this->displayrecord);
+        //print_r($this->viewindividualreport);
          
-
+            $prev= ($this->viewindividualreport[0] -1);
+            $nex=($this->viewindividualreport[0] +1);
          ?>  
          
-         
-                     <h2 class="text-xl font-semibold mt-7"> Daily Client Account History for  </h2>
+                    
+                     <h2 class="text-xl font-semibold mt-7"> Daily Client Report History </h2>
                     <table class="table table-striped table-dark">
-                        <thead>
-                    <tr><td scope="col" align="center">Serial No</td>                    
-                        <td scope="col" align="center">ReportBy</td>
-                        <td scope="col" align="center"> Balance </td> 
-                        <td scope="col" align="center">Mobile</td>   
-                        <td scope="col" align="center">Account Up To Date</td>    
-                        <td scope="col" align="center">View</td>                      
-                    </tr>
-                    </thead>
-                    <tfoot id="tfootid">
-                                        <tr>
-                                            <td colspan="6">
-                                            </td>
-                                        </tr>
-                    </tfoot>
                     <tbody id="tbodyid">
-                                        <?php
+                    <tr><td scope="col" align="left">Mobile Number</td>                    
+                        <td scope="col" align="center"><?php echo $this->viewindividualreport["mobile"]; ?></td>
+                    </tr>
+                    <tr>
+                        <td scope="col" align="left"> Name : </td> 
+                        <td scope="col" align="center"><?php echo $this->viewindividualreport["name"]; ?></td>   
+                    </tr>
+                    <tr>
+                        <td scope="col" align="left"> Balance</td>
+                        <td scope="col" align="right"><?php echo "=N=". number_format($this->viewindividualreport["balance"],2); ?></td>
+                    </tr>
+                    <tr>
+                        <td scope="col" align="left">Comment</td>
 
-                                         foreach ($this->displayrecord as $Key => $Value) {
-                                            echo '<tr>
-                                                    <td>'. $key++ .'</td><td>'.$Value['reportby'].'</td><td>'.$Value['balance'].'</td><td>'.$Value['mobile'].'</td><td>'.$Value['uptodate'].'</td><td><button> View Report</button></td>
-                                                </tr>';
-                                        
-                                        }
-
-
-                                        ?>
-
-                    </tbody>
-                               
-                        </table>
-
+                        <td scope="col" align="right"> <?php echo $this->viewindividualreport["comment"]; ?></td>
+                    </tr>
+                    <tr>
+                        <td scope="col" align="left">Comment2</td>
+                        <td scope="col" align="right"> <?php echo $this->viewindividualreport["comment2"]; ?></td>
                         
+                    </tr>
+                    
+                    <tr>
+                        <td align="left"><a href="<?php echo URL."admdailyreport/displayinfor/".$prev ?>">Previous</a></td>
+                        <td align="right"><a href="<?php echo URL."admdailyreport/displayinfor/".$nex ?>"">Next</a></td>
+                    </tr>
+                   
+                   
+
+                    </tbody>       
+                        </table>
+                        <form method="post" action="<?php echo URL; ?>admdailyreport/updatereport">
+                        <input type="hidden" name="comment2" value="<?php echo $this->viewindividualreport["comment2"]; ?>">
+                        <input type="hidden" name="id" value="<?php echo $this->viewindividualreport[0]; ?>">
+                        <input type="text" name="rex" value="" placeholder="Respond to account officer comment" required>
+                        <input type="submit" value="close Report">
+                    </form>     
                         
          <?php
             echo "</div>";

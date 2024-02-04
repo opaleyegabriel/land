@@ -402,8 +402,7 @@ echo '
                                         <td scope="col" align="left">'. $sn .'</td>
                                             <td scope="col"  align="left">'. $value["created_at"] .'</td>
                                             <td scope="col" align="left">'.$value['description'].'</td>
-                                            <td scope="col" align="right">'.$value['amount'].'</td> 
-                                                                    
+                                            <td scope="col" align="right">'.$value['amount'].'</td>        
                                         </tr>
 
 
@@ -422,17 +421,14 @@ echo '
         <?php 
          echo '<div id="divretire">';
          ?>  
-         
-                      
-                    <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest</h2>
+                               
+            <h2 class="text-xl font-semibold mt-7"> List of Unretired Imprest</h2>
                     <table class="table table-striped table-dark">
                         <thead>
                     <tr><td scope="col" align="center">Serial No</td>                    
                         <td scope="col" align="center">Date Disbursed</td>
                         <td scope="col" align="center">Amount</td>    
                         <td scope="col" align="center">Details</td> 
-                                          
-                        
                     </tr>
                     </thead>
                     <tbody>

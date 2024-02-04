@@ -35,6 +35,17 @@ class Admdailyreport extends Controller{
                 $this->view->render('admdailyreport/display');
             }
             public function displayinfor($id){
-                echo $id;
+                $this->view->viewindividualreport=$this->model->viewdailyreports($id);
+                $this->view->render('admdailyreport/displayinfo');
+            }
+            public function updatereport(){
+                $data=array();
+                $data['response']=$_POST['rex'];
+                $data['id']=$_POST['id'];
+                $data['comment2']=$_POST['comment2'];
+                $this->model->updatereport($data);
+                $this->view->render('admdailyreport/index');
+                //echo "<pre>";
+                //print_r($data);
             }
 }

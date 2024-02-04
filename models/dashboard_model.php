@@ -11,6 +11,18 @@ class Dashboard_Model extends Model {
         session::init();
 
     }
+    public function amountpaid($lngorderno){
+        $sth=$this->db->prepare("SELECT tbl_payments.created_at,tbl_orders.pid,tbl_orders.pname,tbl_orders.pqty,tbl_orders.price,tbl_orders.mobile,tbl_payments.credit, tbl_payments.orderno FROM tbl_payments INNER JOIN tbl_orders ON tbl_orders.mobile=tbl_payments.mobile WHERE tbl_orders.orderno=:order AND tbl_orders.paid='Y';");
+
+            $sth->setFetchMode(PDO::FETCH_ASSOC);
+
+            $sth->execute(array(
+
+                ':order'=>$lngorderno
+               // ':mobile'=>$mobile
+             ));
+            return $sth->fetchAll();
+    }
     public function acctofficer(){
         $sth=$this->db->prepare("SELECT * FROM tbl_adm INNER JOIN tbl_profile ON tbl_adm.mobile=tbl_profile.accountofficer WHERE tbl_profile.phone=:mobile");
         $sth->execute(array(

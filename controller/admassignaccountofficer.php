@@ -26,9 +26,13 @@ class Admassignaccountofficer extends Controller{
 
     function index(){
         $this->view->alllist=$this->model->alllist();
+        $this->view->alllistcompleted =$this->model->alllistcompleted();
+
         $this->view->alllist_osogbo=$this->model->alllist_osogbo();
-        $this->view->alllist_ibadan=$this->model->alllist_ibadan();
+        $this->view->alllist_osogbo_completed=$this->model->alllist_osogbo_completed();
         
+        $this->view->alllist_ibadan=$this->model->alllist_ibadan();
+        $this->view->alllist_ibadan_completed=$this->model->alllist_ibadan_completed();
         
         $this->view->render('admassignaccountofficer/index');
     }

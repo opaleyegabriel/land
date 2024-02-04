@@ -632,12 +632,10 @@ session::set('adon',false);
                                        
 
                                     echo "<br/>";
-
                                     echo '<p>Contract Activated on:'. date('d-m-Y',strtotime($value['order_date'])) . '</p>';
                                     echo '<p>Contract Expired on:'. date('d-m-Y',strtotime($newendmonth)). ' </p>';
                                    
-                                       
-                                        echo '<p style=size:10em;>CONTRACT EXPIRED</p>
+                                    echo '<p style=size:10em;>CONTRACT EXPIRED</p>
 
                                         <h2 class="text-xl font-semibold mt-7"> '. $value["pname"] .'  (Temporary Number :) '. $value["qty"]. '  plots( '. $value["allocation"] .' )  </h2>
 
@@ -682,13 +680,16 @@ session::set('adon',false);
 
                                         <div class="col-md-3 col-sm-6">
 
+                                        <a href="'.URL.'dashboard/amountpaid/'. $lngorderno .'">
+
                                             <div class="single-promo promo2">
 
-                                                <a href="'.URL.'amountpaid'.'"><i class="fa fa-truck"></i></a>
+                                                <i class="fa fa-truck"></i>
 
                                                 <p>Amount Paid <span>₦'. number_format($value["amountpaid"],2) .'k</span> <input type="hidden" name="paidamt"  value="'. $value["amountpaid"] .'"  > </p>
 
                                             </div>
+                                            </a>
 
                                         </div>
 
@@ -720,7 +721,7 @@ session::set('adon',false);
                                             $blockadd=$value['blockaddress'];
                                             $allocation_orderno=$value['orderno'];
                                         } 
-                                        if($lngorderno == $allocation_orderno){
+                                    if($lngorderno == $allocation_orderno){
                                          echo   '<div class="col-md-3 col-sm-6">
 
                                         <div class="single-promo promo3">
@@ -738,12 +739,9 @@ session::set('adon',false);
                                            foreach ($this->allocated as $key => $value) {
                                                 echo '<td> Plot : '.$value["plot"].'</td>';
                                              }
-                                        
-
-                                        }
-
-                                           
-                                           echo '</tr> </p>
+                                        }                                           
+                                    
+                                        echo '</tr> </p>
 
                                         </div>
 
@@ -818,22 +816,6 @@ session::set('adon',false);
                                 </div>
 
                             </div>
-
-                            
-
-                    
-
-                   
-
-
-
-
-
-
-
-
-
-
 
             ';
 

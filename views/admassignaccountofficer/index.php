@@ -325,31 +325,40 @@ echo '
                       <div id="showIlorin"><input type="button" value="Show Ilorin Client"></div>
                       <div id="showOsogbo"><input type="button" value="Show Osogbo Client"></div>
                       <div id="showIbadan"><input type="button" value="Show Ibadan Client"></div>
-                      
+                     
                     </div>
+                    <input type="checkbox" id="account" name="account" value="account">
 
                 </div>
     <div id="Ilorin">
     <h2 class="text-xl font-semibold mt-7"> Ilorin Client List </h2>
                         <table class="table table-striped table-dark">
                             <thead>
-                        <tr>
-                           
-                            <td scope="col" align="center">Product ID</td>
-                            <td scope="col" align="center">Product Name</td>
-                            <td scope="col" align="center">Price/Plot</td>                  
-                            <td scope="col" align="center">Qty Purchased</td>
-                            <td scope="col" align="center">Client Full Name</td>  
-                            <td scope="col" align="center">Mobile Number</td>
-                            <td scope="col" align="center">Manage Account</td>
-                            <td>s/n</td>
-                        </tr>
-                        </thead>
-                    <tbody>
-                    </tbody>
-                        <?php
-                        //  print_r($this->paymentlist);
                         
+                        <?php
+                        
+                        echo ' 
+                <div id="ilr1">
+                        <tr>
+                       
+                        <td scope="col" align="center">Sno</td>
+                        <td scope="col" align="center"> Client Name</td>
+                        <td scope="col" align="center">Mobile</td>                  
+                        <td scope="col" align="center">Land</td>
+                        <td scope="col" align="center">Qty</td>  
+                        <td scope="col" align="center">Price</td>
+                        <td scope="col" align="center">Total Amount</td>
+                        <td scope="col" align="center">Amount Paid</td>
+                        <td scope="col" align="center">Balance</td>
+                        <td scope="col" align="center">Short Orderno</td>
+                        <td scope="col" align="center">Link</td>
+                        <td>s/n</td>
+                    </tr>
+                    </thead>
+                <tbody>
+                
+                        ';
+
                         $sn=1;
                         foreach ($this->alllist as $key => $value) {
                             # code...
@@ -367,10 +376,62 @@ echo '
                                     <td scope="col" align="left">'. $sn .'</td>
                                 </tr>
 
-
                             ';
                             $sn++;
                         }
+
+                    echo "</tbody></div>";
+                            
+                    echo '<div id="ilr2">
+                            <tr>
+                           
+                            <td scope="col" align="center">Sno</td>
+                            <td scope="col" align="center"> Client Name</td>
+                            <td scope="col" align="center">Mobile</td>                  
+                            <td scope="col" align="center">Land</td>
+                            <td scope="col" align="center">Qty</td>  
+                            <td scope="col" align="center">Price</td>
+                            <td scope="col" align="center">Total Amount</td>
+                            <td scope="col" align="center">Amount Paid</td>
+                            <td scope="col" align="center">Balance</td>
+                            <td scope="col" align="center">Short Orderno</td>
+                            <td scope="col" align="center">Link</td>
+                            <td>s/n</td>
+                        </tr>
+                        </thead>
+                    <tbody>
+                    
+                            ';
+                            $sn=1;
+                        foreach ($this->alllistcompleted as $key => $value) {
+                            # code...
+                            echo'
+                                <tr>
+                                <td scope="col" align="left">'. $sn .'</td>
+                                    <td scope="col" >'. $value["name"] .'</td>
+                                    <td scope="col" align="left"> '. $value["mobile"] .'</td>
+                                    <td scope="col" align="right"> '. $value["pname"] .'</td>
+                                    <td scope="col" align="right"> '. $value["pqty"] .'</td>
+                                    <td scope="col" align="right"> '. $value["price"] .'</td>
+                                    <td scope="col" align="right"> '. number_format($value["totalamt"]) .'</td>
+                                    <td scope="col" align="right"> '. number_format($value["amoountpaid"]) .'</td>
+                                    <td scope="col" align="right"> '. number_format($value["balance"]) .'</td>
+                                    
+                                    <td scope="col" align="left"> '. $value["srtorder"] .'</td>
+                                    <td scope="col" align="center"><a href='. URL ."admassignaccountofficer/manager/". $value["orderno"] .'><input type="button" value="Manage Order"/></a></td>
+                                    
+                                </tr>
+
+
+                            ';
+                            $sn++;
+                         }
+                        echo"
+                        </tbody></div>
+                        ";
+
+                    
+                    
                         
                         ?>
                 </table>

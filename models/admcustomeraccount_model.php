@@ -154,8 +154,8 @@ class Admcustomeraccount_model extends Model {
         }
     }
     public function transactiondailyreport($data){
-        $insert=$this->db->prepare("INSERT INTO tbl_dailyhistory(balance,uptodate,comment,comment2,mobile,orderno,reportby,branchid)
-         VALUES(:b,:upd,:co1,:co2,:mobile,:orderno,:rptby,:branchid)");
+        $insert=$this->db->prepare("INSERT INTO tbl_dailyhistory(balance,uptodate,comment,comment2,mobile,orderno,reportby,branchid,rstatus)
+         VALUES(:b,:upd,:co1,:co2,:mobile,:orderno,:rptby,:branchid,:rst)");
         $insert->execute(array(
             ':b'=>$data['balance'],
             ':upd'=>$data['uptodate'],
@@ -164,7 +164,8 @@ class Admcustomeraccount_model extends Model {
             ':mobile'=>$data['mobile'],
             ':orderno'=>$data['orderno'],
             ':rptby'=>$data['reportedby'],
-            ':branchid'=>$data['branchid']
+            ':branchid'=>$data['branchid'],
+            ':rst'=>'N'
         ));
         echo '<script type="text/javascript">';
 			            echo 'alert("Account Unblock  successfully and report submitted");

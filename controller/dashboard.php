@@ -31,7 +31,11 @@ class Dashboard extends Controller{
             $this->view->render('dashboard/index');
 
         }
-
+        public function amountpaid($lngorderno){
+       // print_r($lngorderno);
+          $this->view->amountpaid=$this->model->amountpaid($lngorderno);
+          $this->view->render('dashboard/amountpaid');
+        }
         public function renewnow(){
           $data=array();
           $data['orderno']=$_POST['orderno'];

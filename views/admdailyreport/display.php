@@ -375,7 +375,7 @@ echo '
                                          foreach ($this->displayrecord as $Key => $Value) {
                                             $id=$Value['id'];
                                             echo '<tr>
-                                                    <td>'. $key++ .'</td><td>'.$Value['reportby'].'</td><td>'.$Value['balance'].'</td><td>'.$Value['mobile'].'</td><td>'.$Value['uptodate'].'</td><td><a href='. URL.'admdailyreport/displayinfor/'. $id .'><button style="color:blue"> View Report</button></a></td>
+                                                    <td align="left">'. $Key++ .'.</td><td>'.$Value['reportby'].'</td><td align="right">'.$Value['balance'].'</td><td align="center">'.$Value['mobile'].'</td><td align="center">'.$Value['uptodate'].'</td><td><a href='. URL.'admdailyreport/displayinfor/'. $id .'><button> View Report</button></a></td>
                                                 </tr>';
                                         
                                         }
