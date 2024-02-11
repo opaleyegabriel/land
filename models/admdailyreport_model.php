@@ -30,7 +30,11 @@ class Admdailyreport_model extends Model {
         ));
         return $sth->fetch();
     }
-
+    public function alllands(){
+        $sth=$this->db->prepare("SELECT * FROM tbl_products");
+        $sth->execute();
+        return $sth->fetchAll();
+    }
     public function dailyclientaccounthistory(){
         $today="%".date("Y-m-d H:i:s");
     $sth=$this->db->prepare("SELECT DISTINCT a.balance,a.uptodate,a.comment,a.mobile,b.name  FROM tbl_dailyhistory a, tbl_profile b WHERE a.rstatus=:rst AND a.mobile=b.phone AND a.branchid=:bid AND a.reportedby:rpt AND a.created_at like :dd");

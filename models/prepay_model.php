@@ -15,6 +15,14 @@ class Prepay_model extends Model {
         $sth->execute();
         return $sth->fetchAll();
     }
+    public function delete($id){
+        $sth=$this->db->prepare("DELETE FROM tbl_prepayment WHERE id=:id");
+        $sth->execute(array(
+            ':id'=>$id
+        ));
+    }
+        
+    
     public function add($data){
         $cname="%". $data['cname']."%";
         $s=$this->db->prepare("SELECT * FROM tbl_prepayment WHERE clientname like :cname AND amount=:amt AND usedstatus= :n");

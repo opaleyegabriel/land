@@ -399,10 +399,12 @@ echo '
                             <td> =N= '. number_format($value["amount"]) .'</td>
                             <td> '. $n .'</td>
                             <td>'. $value["created_at"] .'</td>
+                            <td><a href="'. URL .'prepay/delete/'.$value["id"].'"><img src="'.URL.'public/images/delete.svg"/>Delete</a></td>
                         </tr>
 
 
                     ';
+                    $sn++;
                 }
                 ?>
            </table>

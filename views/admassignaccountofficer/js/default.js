@@ -20,10 +20,11 @@ $("#showIlorin").click(function(){
 	if($('#account').is(':checked')){
 		$("#ilr1").hide(1000);
 		$("#ilr2").show(2000);
+		alert("checked");
 	}else{
 		$("#ilr2").hide(1000);
 		$("#ilr1").show(2000);
-		
+		alert("not checked");	
 	}
 	
 })

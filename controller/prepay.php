@@ -28,6 +28,12 @@ class Prepay extends Controller{
                   $this->view->render('prepay/index');
 
             }
+            public function delete($id){
+               $this->model->delete($id);
+               $this->view->paymentlist=$this->model->unapprovedlist(); 
+               $this->view->render('prepay/index');
+
+            }
             public function add(){
             	$data=array();
             	$data['amount']=$_POST['amount'];

@@ -400,6 +400,35 @@ echo '
          <?php
             echo "</div>";
          ?>    
+         <table align="center">
+            <thead>
+                <tr>
+                    <td>S/N</td>
+                    <td>Land</td>
+                    <td>Check Sales</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $sn=1;
+                foreach ($this->alllands as $key => $value) {
+                    echo '
+                    <tr>
+                        <td>'.$sn.'</td>
+                        <td>'.$value["product_name"].'  '. $value["description"] .'</td>
+                        <td><a href="'. URL . 'admdailyreport/checksales/'. $value["id"] .'">Check Sales</a></td>
+                    </tr>
+                    ';
+
+                    $sn++;
+                }
+                 
+                ?>
+                
+                
+            </tbody>
+
+         </table>
 
 
 

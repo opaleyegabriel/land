@@ -19,11 +19,13 @@ class Admdailyreport extends Controller{
             }
             
             function index(){ 
-              //  $this->view->dailyclientaccounthistory=$this->model->dailyclientaccounthistory();                  
+              $this->view->alllands=$this->model->alllands();                  
                   $this->view->render('admdailyreport/index');
 
             }
-
+            public function checksales($id){
+                echo $id;
+            }
             public function display(){
                 $data=array();
                 $data['branch']=$_POST['branch'];

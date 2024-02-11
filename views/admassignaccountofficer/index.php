@@ -413,8 +413,8 @@ echo '
                                     <td scope="col" align="right"> '. $value["pname"] .'</td>
                                     <td scope="col" align="right"> '. $value["pqty"] .'</td>
                                     <td scope="col" align="right"> '. $value["price"] .'</td>
-                                    <td scope="col" align="right"> '. number_format($value["totalamt"]) .'</td>
-                                    <td scope="col" align="right"> '. number_format($value["amoountpaid"]) .'</td>
+                                    <td scope="col" align="right"> '. number_format($value["totalAmt"]) .'</td>
+                                    <td scope="col" align="right"> '. number_format($value["Amountpaid"]) .'</td>
                                     <td scope="col" align="right"> '. number_format($value["balance"]) .'</td>
                                     
                                     <td scope="col" align="left"> '. $value["srtorder"] .'</td>
