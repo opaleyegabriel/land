@@ -19,12 +19,19 @@ class Admdailyreport extends Controller{
             }
             
             function index(){ 
-              $this->view->alllands=$this->model->alllands();                  
+                  $this->view->alllands=$this->model->alllands();                  
                   $this->view->render('admdailyreport/index');
 
             }
             public function checksales($id){
-                echo $id;
+                if($id==1 || $id==5 || $id==22 || $id==23 || $id==24){
+                    $this->view->rekereport=$this->model->rekereport($id);
+                 $this->view->render('admdailyreport/salesreport');
+                }
+                if($id==6 || $id==7 || $id==11 || $id==25 || $id==26){
+                    $this->view->oshinreport=$this->model->oshinreport($id);
+                 $this->view->render('admdailyreport/oshinreport');
+                }
             }
             public function display(){
                 $data=array();

@@ -340,45 +340,56 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-    <div align="center">
-        <form method="POST" action="<?php echo URL?>admdailyreport/display">
-            <div name="snackbar" id="snackbar" class="snackbar"></div>
-            <label>Pick a Branch:</label>
-                <select name="branch" id="branch" name="branch">
-                    <option value="1">Ilorin Branch</option>
-                    <option value="2">Osogbo Branch</option>
-                    <option value="3">Ibadan Branch</option>
-                </select>
-            <p>Select Report Date: <input type="text" id="datepicker" name="datepicker" onchange="getReportList()"></p>
-            <input type="submit" value="Display Report">
-            <form>
-</div>
-          
-         <table align="center" border="1">
+                <h1>List of Customer that purchased Peace City Estate, Reke, Ilorin</h1>
+          <table align="center" border="1">
             <thead>
                 <tr>
                     <td>S/N</td>
-                    <td>Land</td>
-                    <td> Report Sales</td>
+                    <td>Customer Name</td>
+                    <td>Mobile No</td>
+                   
+                    <td>Qty</td>
+                    <td>Unit Price</td>
+                    <td> Total Amount</td>
+                    <td> Amount Paid</td>
+                    <td> Balance</td>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                //echo "<pre>";
-                //print_r($this->alllands);
-                
+               // echo "<pre>";
+               // print_r($this->rekereport);
+                $tamt=0;
+                $amtpaid=0;
+                $bal=0;
                 $sn=1;
-                foreach ($this->alllands as $key => $value) {
+                foreach ($this->oshinreport as $key => $value) {
+                    $tamt = ($tamt + $value['totalAmt']);
+                    $amtpaid = ($amtpaid + $value['Amountpaid']);
+                    $bal = ($bal + $value['balance']);
                     echo '
                     <tr border="2">
                         <td>'.$sn.'</td>
-                        <td>'.$value["product_name"].' / '. $value["description"] .'</td>
-                        <td><a href="'. URL . 'admdailyreport/checksales/'. $value["id"] .'"><input type="button" value="Check" ></a></td>
+                        <td>'.$value["name"].'</td>
+                        <td>'.$value["mobile"].'</td>
+                        
+                        <td align="right">'.$value["pqty"].'</td>
+                        <td align="right">'. number_format($value["price"],2).'</td>
+                        <td align="right">'. number_format($value["totalAmt"],2).'</td>
+                        <td align="right">'.number_format($value["Amountpaid"],2).'</td>
+                        <td align="right">'.number_format($value["balance"],2).'</td>
                     </tr>
                     ';
 
                     $sn++;
                 }
+                echo '<tr>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td align="right">'.number_format($tamt,2).'</td>
+                <td align="right">'. number_format($amtpaid,2) .'</td>
+                <td align="right">'. number_format($bal,2) .'</td>
+                </tr>
+                ';
                  
                 ?>
                 

@@ -12,6 +12,22 @@ class Admdailyreport_model extends Model {
 
     }
 
+    public function rekereport($id){
+        $sth=$this->db->prepare("SELECT c.orderno as srtorder,a.pid,a.pname,a.price,a.pqty,(a.price* a.pqty) as totalAmt,sum(c.credit) as Amountpaid, 
+        ((a.price* a.pqty)- sum(c.credit)) as balance, a.mobile,a.paid,b.name,a.orderno FROM tbl_orders a, tbl_profile b, tbl_debt c 
+        WHERE c.mobile=a.mobile AND a.mobile=b.phone and a.paid='Y' and (a.pid=1 or a.pid=5 OR a.pid=22 or a.pid=23 or a.pid=24)
+        GROUP by a.orderno;");
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+    public function oshinreport($id){
+        $sth=$this->db->prepare("SELECT c.orderno as srtorder,a.pid,a.pname,a.price,a.pqty,(a.price* a.pqty) as totalAmt,sum(c.credit) as Amountpaid, 
+        ((a.price* a.pqty)- sum(c.credit)) as balance, a.mobile,a.paid,b.name,a.orderno FROM tbl_orders a, tbl_profile b, tbl_debt c 
+        WHERE c.mobile=a.mobile AND a.mobile=b.phone and a.paid='Y' and (a.pid=6 or a.pid=7 OR a.pid=11 or a.pid=25 or a.pid=26)
+        GROUP by a.orderno;");
+        $sth->execute();
+        return $sth->fetchAll();
+    }
 
     public function updatereport($data){
         $inf=$data['comment2']."  Manager Report :  " . $data['response'];
