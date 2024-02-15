@@ -721,7 +721,26 @@ echo '
        
          ?>  
          
-                   Beacon Section
+                <?php 
+                    echo'
+                    <h2 class="text-xl font-semibold mt-7"> Allocation for the land Details Below </h2>
+                   <div class="card">
+                   <form enctype="multipart/form-data" action="'.URL.'admcustomeraccount/allocate" method="post" >                      
+                   <div class="card-body">
+                      
+                       <input type="text" name="point1" placeholder="Point 1" required>
+                       <input type="text" name="point2" placeholder="Point 2" required>
+                       <input type="text" name="point3" placeholder="Point 3" required>
+                       <input type="text" name="point4" placeholder="Point 4" required>
+                       <input type="submit" value="Save Beacons">
+                   </form>
+                   </div>
+                   </div>';
+                ?>
+
+
+
+
          <?php
             echo "</div>";
          ?>    

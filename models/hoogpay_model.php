@@ -15,9 +15,6 @@ class Hoogpay_model extends Model {
 
 
     public function getorders(){
-
-
-
         $sth=$this->db->prepare("SELECT * FROM tbl_orders WHERE mobile=:m AND paid='N'");
 
         $sth->setFetchMode(PDO::FETCH_ASSOC);

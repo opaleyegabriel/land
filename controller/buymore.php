@@ -40,8 +40,6 @@ class Buymore extends Controller{
              $this->model->reorder($data);
           }
 
-
-
         
     }
 }
