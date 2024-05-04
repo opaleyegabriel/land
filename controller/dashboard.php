@@ -57,6 +57,7 @@ class Dashboard extends Controller{
         $data['orderno']=$_POST['orderno'];
         $data['amount']=$_POST['amount'];       
         $data['credit']=$_POST['credit'];
+        //echo "Payment under maintenance, please hold on";
        // print_r($data);
        // exit();
 

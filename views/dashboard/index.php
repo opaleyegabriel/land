@@ -519,9 +519,11 @@ session::set('adon',false);
 
                         
             if(!empty($this->allmyproducts)){
-                     // print_r($this->allmyproducts);
+                    // print_r($this->allmyproducts);
+                     //exit();
 
                               foreach ($this->allmyproducts as $key => $value) {
+                                $main_orderno=$value['orderno'];
 
                                      $balance=$value["totalamt"] - $value["amountpaid"];
                                      $lngorderno=$value['lngorderno'];
@@ -749,7 +751,7 @@ session::set('adon',false);
 
                                         <input type="hidden" id="mobile" name="mobile" value='. session::get('lphone') .' required />
 
-                                        <input type="hidden" name="orderno" value="'. $value['orderno'] .'" id="orderno" required/>
+                                        <input type="hidden" name="orderno" value="'. $main_orderno .'" id="orderno" required/>
 
                                         <input type="hidden" name="refid" value="'. $refid. '" id="refid" required />
 

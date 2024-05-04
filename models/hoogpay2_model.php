@@ -433,7 +433,10 @@ public function payagain_new($data){
 
                 $orderno=$myrec['orderno'];
 
-
+        //if(strlen($orderno) > 10){
+          //      $ord = substr($orderno,11);
+            //    $orderno=substr($ord,0,10);
+           // }
 
                 
 
@@ -443,7 +446,7 @@ public function payagain_new($data){
 
             ':mobile'=>$data['mobile'],
 
-            ':orderno'=>$data['orderno'],
+            ':orderno'=>$orderno,
 
             ':refid'=>$data['refid'],
 
@@ -606,13 +609,20 @@ public function payagain_new($data){
 
         if($ok){
 
+            $orderno=$data['orderno'];
+          //  if(strlen($orderno) > 10){
+            //    $ord = substr($orderno,11);
+             //   $orderno=substr($ord,0,10);
+           // }
+
+
                 $sth=$this->db->prepare("INSERT INTO tbl_payments(mobile,orderno,refid,qty,price,debit,credit) VALUES (:mobile,:orderno,:refid,:qty,:price,:debit,:credit)");
 
         $sth->execute(array(
 
             ':mobile'=>$data['mobile'],
 
-            ':orderno'=>$data['orderno'],
+            ':orderno'=>$orderno,
 
             ':refid'=>$data['refid'],
 
@@ -636,7 +646,7 @@ public function payagain_new($data){
 
             ':mobile'=>$data['mobile'],
 
-            ':orderno'=>$data['orderno'],
+            ':orderno'=>$orderno,
 
             ':debit'=>0,
 
