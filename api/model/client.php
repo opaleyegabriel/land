@@ -27,7 +27,7 @@
            return $sql;     
         }
 
-//GET Single Post
+//GET Single client
 public function read_single(){
     $query= 'SELECT * FROM
             '. $this->table.'
@@ -39,7 +39,6 @@ public function read_single(){
     //Bind ID
     $stmt->bindParam(':phone',$this->phone);
     
-
     //Execute query
     $stmt->execute();
 
@@ -51,8 +50,7 @@ public function read_single(){
             $this->phone = $row['phone'];
             $this->email = $row['email'];
             $this->agentcode = $row['agentcode'];
-            $this->accountofficer = $row['accountofficer'];	
-            
+            $this->accountofficer = $row['accountofficer'];	            
 
 }
                 

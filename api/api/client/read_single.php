@@ -4,20 +4,18 @@
 	header('Content-Type: application/json');
 
 	include_once '../../config/database.php';
-	include_once '../../model/Client.php';
+	include_once '../../model/client.php';
 
 	//Instantiate DB & Connect
 	$database = new Database();
-	$db= $database->connect();
+	$db = $database->connect();
 
 	//instantiate users list object
 	$client= new Client($db);
 
 	//GET clientname and pwd from URL
 	$client->phone=isset($_GET['phone']) ? $_GET['phone'] :die();
-	
-
-	
+		
 	//GET client single
 	$client->read_single();
 
@@ -33,6 +31,6 @@
 				
 
 		);
- array_push($client_arr, $client_list);
-	//make Json
-	echo json_encode($client_arr);
+       array_push($client_arr, $client_list);
+	   //make Json
+	   echo json_encode($client_arr);
