@@ -55,32 +55,42 @@ public function read_single(){
 }
                 
     public function create(){
-        $query='INSERT INTO ' .$this->table . ' SET name = :name, phone = :phone, email = :email, agentcode = :agentcode, accountofficer = :accountofficer';
+        $query='INSERT INTO ' .$this->table . ' 
+        SET 
+        name = :name, 
+        phone = :phone, 
+        email = :email, 
+        agentcode = :agentcode, 
+        accountofficer = :accountofficer 
+        
+        ';
         //prepare the statement
         $sql= $this->conn->prepare($query);
-        //clean data (remove unwanted special characters)
-        $this->name       =htmlspecialchars(strip_tags($this->name));
-        $this->phone       =htmlspecialchars(strip_tags($this->phone));
-        $this->email      =htmlspecialchars(strip_tags($this->email));
-        $this->agentcode      =htmlspecialchars(strip_tags($this->agentcode));
-        $this->$accountofficer      =htmlspecialchars(strip_tags($this->$accountofficer));
        
 
-        //bind parameter
-        $sql->bindParam(':name', $this->name);
-        $sql->bindParam(':phone', $this->phone);
-        $sql->bindParam(':email', $this->email);
-        $sql->bindParam(':agentcode', $this->agentcode);
-        $sql->bindParam(':accountofficer', $this->accountofficer);
-        
+		//Clean data
+		$this->name=htmlspecialchars($this->name);
+		$this->phone=htmlspecialchars($this->phone);
+		$this->email=htmlspecialchars($this->email);
+		$this->agentcode=htmlspecialchars($this->agentcode);
+		$this->accountofficer=htmlspecialchars($this->accountofficer);
+		
 
-        //execute query
-        if($sql->execute()){
-            return true;
-        }
-        //print error if something goes wrong
-        printf("Error %s. \n",$sql->error);
-        return false;
+		//bind Data
+		$sql->bindParam(':name',$this->name);
+		$sql->bindParam(':phone',$this->phone);
+		$sql->bindParam(':email',$this->email);
+		$sql->bindParam(':agentcode',$this->agentcode);
+		$sql->bindParam(':accountofficer',$this->accountofficer);
+		
+
+		//Execute Query
+		if($sql->execute()){
+			return true;
+		}
+		//print error if somethins goes wrong
+		printf("Error: %s.\n",$sql->error);
+		return false;
     }
     
 }
