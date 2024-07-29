@@ -1,40 +1,9 @@
 <?php
 session::init();
-$currentuser=session::get("currentuser");
-$branch=session::get("branch");
-//print($currentuser);
-//exit();
-/*
-    require_once  ('models/dashboard_model.php');
-    $d= new Dashboard_Model();
-    $allmyproducts=($d->all_ind_products());
-    $allitems=($d->allitems());
-    
-    
-    echo "<pre>";
-    print_r($checkforunsettledpayments);
-    exit();
-    
-	//this is for list of posts
-    $msgDisplay=($d->DisplayMsgList());
-    //this is for post counts
-    $msgDisplaycount=($d->DisplayMsgCount());
-    $tharraycount=count($msgDisplaycount);
-    //this is for daily bet prediction
-    $freebet=($d->GetTodayPrediction());
-    //This is for advert
-    $advert=($d->SelectRandonSpecialAdvert());
-     
-     echo "<pre>";
-    print_r($this->checkforunsettledpayments);
-    exit();
-   */
-    
-    
+
 ?>
 
 
-  
 <div id="wrapper">
 
 <!-- Header -->
@@ -172,18 +141,6 @@ echo '
 ?>
 
 <?php
-if((Session::get('usertype')==1)){
-echo '
-<li><a href="'.URL."admrdr".'">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
-    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-</svg> <span> Reward Duplicate Remove</span> </a>
-</li>
-';
-}
-?>
-<?php
 if(Session::get('usertype')==1){
 echo '
 <li><a href="'. URL."admassignaccountofficer".'">
@@ -285,7 +242,7 @@ echo '
 <?php
 if((Session::get('usertype')==1)){
 echo '
-<li><a href="'.URL."admdailyreport".'">
+<li><a href="'.URL."dailyreport".'">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
     <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
     <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
@@ -295,6 +252,19 @@ echo '
 }
 
 ?> 
+
+<?php
+if((Session::get('usertype')==1)){
+echo '
+<li><a href="'.URL."admrdr".'">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
+    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+</svg> <span> Reward Duplicate Remove</span> </a>
+</li>
+';
+}
+?>
 
 <?php
 if(Session::get('usertype')==1){
@@ -343,7 +313,6 @@ echo '
 
 
 
-
             <!-- sidebar overly for mobile -->
             <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
 
@@ -352,63 +321,118 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-    <div align="center">
-        <form method="POST" action="<?php echo URL?>admdailyreport/display">
-            <div name="snackbar" id="snackbar" class="snackbar"></div>
-            <label>Pick a Branch:</label>
-                <select name="branch" id="branch" name="branch">
-                    <option value="1">Ilorin Branch</option>
-                    <option value="2">Osogbo Branch</option>
-                    <option value="3">Ibadan Branch</option>
-                </select>
-            <p>Select Report Date: <input type="text" id="datepicker" name="datepicker" onchange="getReportList()"></p>
-            <input type="submit" value="Display Report">
-            <form>
-</div>
-          
-         <table align="center" border="1">
-            <thead>
-                <tr>
-                    <td>S/N</td>
-                    <td>Land</td>
-                    <td> Report Sales</td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                //echo "<pre>";
-                //print_r($this->alllands);
-                
-                $sn=1;
-                foreach ($this->alllands as $key => $value) {
-                    echo '
-                    <tr border="2">
-                        <td>'.$sn.'</td>
-                        <td>'.$value["product_name"].' / '. $value["description"] .'</td>
-                        <td><a href="'. URL . 'admdailyreport/checksales/'. $value["id"] .'"><input type="button" value="Check" ></a></td>
-                    </tr>
-                    ';
 
+
+
+
+
+
+
+                <div class="lg:flex lg:space-x-12">
+
+                    <div class="lg:w-1/4 flex-shrink-0 space-y-5">
+                      
+                    </div>
+
+                </div>
+                <h2 class="text-xl font-semibold mt-7"> List of Rewards With Dates </h2>
+                <table>
+                    <thead>
+                <tr>
+                    <td>s/n</td>
+                    <td scope="col" align="center">S/N</td>
+                    <td scope="col" align="center">User Mobile</td>
+                    <td scope="col" align="center">Customer Mobile</td>                  
+                    <td scope="col" align="center">Amount Paid</td>
+                    <td scope="col" align="center">%</td>    
+                    <td scope="col" align="center">Trn_Date</td>    
+                    <td scope="col" align="center">Status</td> 
+                    <td scope="col" align="center">Action</td>                  
+                </tr>
+                </thead>
+            <tbody>
+            </tbody>
+                <?php
+                  //  print_r($this->paymentlist);
+                function MyStatus(string $a){
+                    if($a=="T"){
+                        return 'Transfered';
+                    }elseif ($a=="P") {
+                        return 'Paid/Already on Land Dashboard';
+                    }else{
+                        return 'Normal';
+                    }
+                }
+                $sn=1;
+                
+                foreach ($this->allrewards as $key => $value) {
+                    # code...
+                    $status=MyStatus($value['cashout']);
+                    echo'
+                        <tr>
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" >'. $value["mobile"] .'</td>
+                            <td scope="col" >'. $value["client_mobile"] .'</td>
+                            <td scope="col" > '. number_format($value["client_paid"]).'</td>
+                            <td scope="col" align="right"> =N='. number_format($value["r7pcent"]) .'</td>
+                            <td scope="col" align="left">'. $value["created_at"] .'</td>
+                            <td scope="col" align="left">'. $status .'</td>
+                            <td><a href='. URL ."admrdr/deleteduplicate/". $value["id"] .'><input type="button" value="Delete"></a></td>;
+                            
+                        </tr>
+
+
+                    ';
                     $sn++;
                 }
-                 
+                
                 ?>
-                
-                
-            </tbody>
+           </table>
+                 
 
-         </table>
-
-
-
+            </div>
         </div>
     </div>
-                                     
-    
 
-    <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );    
-  </script>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("July 16, 2022 00:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+
+
+
+
+
+
+
+
+
 

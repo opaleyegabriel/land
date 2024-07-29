@@ -34,7 +34,6 @@ $branch=session::get("branch");
 ?>
 
 
-  
 <div id="wrapper">
 
 <!-- Header -->
@@ -172,18 +171,6 @@ echo '
 ?>
 
 <?php
-if((Session::get('usertype')==1)){
-echo '
-<li><a href="'.URL."admrdr".'">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
-    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-</svg> <span> Reward Duplicate Remove</span> </a>
-</li>
-';
-}
-?>
-<?php
 if(Session::get('usertype')==1){
 echo '
 <li><a href="'. URL."admassignaccountofficer".'">
@@ -285,7 +272,7 @@ echo '
 <?php
 if((Session::get('usertype')==1)){
 echo '
-<li><a href="'.URL."admdailyreport".'">
+<li><a href="'.URL."dailyreport".'">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-pink-500">
     <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
     <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
@@ -342,9 +329,7 @@ echo '
 </div>
 
 
-
-
-            <!-- sidebar overly for mobile -->
+ <!-- sidebar overly for mobile -->
             <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
 
         </div>
@@ -352,63 +337,73 @@ echo '
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
-    <div align="center">
-        <form method="POST" action="<?php echo URL?>admdailyreport/display">
-            <div name="snackbar" id="snackbar" class="snackbar"></div>
-            <label>Pick a Branch:</label>
-                <select name="branch" id="branch" name="branch">
-                    <option value="1">Ilorin Branch</option>
-                    <option value="2">Osogbo Branch</option>
-                    <option value="3">Ibadan Branch</option>
-                </select>
-            <p>Select Report Date: <input type="text" id="datepicker" name="datepicker" onchange="getReportList()"></p>
-            <input type="submit" value="Display Report">
-            <form>
-</div>
-          
-         <table align="center" border="1">
-            <thead>
-                <tr>
-                    <td>S/N</td>
-                    <td>Land</td>
-                    <td> Report Sales</td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                //echo "<pre>";
-                //print_r($this->alllands);
-                
-                $sn=1;
-                foreach ($this->alllands as $key => $value) {
-                    echo '
-                    <tr border="2">
-                        <td>'.$sn.'</td>
-                        <td>'.$value["product_name"].' / '. $value["description"] .'</td>
-                        <td><a href="'. URL . 'admdailyreport/checksales/'. $value["id"] .'"><input type="button" value="Check" ></a></td>
-                    </tr>
-                    ';
 
+ 
+                 <h2 class="text-xl font-semibold mt-7"> Customer and Order Edit </h2>
+                 
+                    <input type="number" id="clientmobile" name="clientmobile" placeholder="Customer Registered Number">
+                    <input type="button" id="DisplayRecords" name="display" value= "Display Order(s)">
+                 
+            <div id="tablecontainer">
+                <table class="table table-striped table-dark">
+                    <thead>
+                <tr>
+                    <td>s/n</td>
+                    
+                    <td scope="col" align="center">Order No.</td>                    
+                    <td scope="col" align="center">Qty</td>
+                    <td scope="col" align="center">Amount</td>                      
+                    <td scope="col" align="center">CTP</td>   
+                    <td scope="col" align="center">CTO</td>
+                    <td scope="col" align="center">CP</td>
+                    <td scope="col" align="center">CHP</td>                   
+                </tr>
+                </thead>
+                <tbody id="tbodyid">
+                
+                <?php
+                    //print_r($this->requestlist);
+                /*
+                $sn=1;
+                
+                foreach ($this->requestlist as $key => $value) {
+                    # code...
+                    if($value['vstatus']=="Feedback"){
+                        echo'
+                        <tr style="color:green">
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" align="left">'. $value["site"] .'</td>
+                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="left">'. $value["vstatus"] .'</td>
+                            <td scope="col"><a href='. URL ."svfeedback/feedback/". $value["id"] .'><input type="button" value="View"></a></td>;
+                        </tr>';
+
+                    }
+                    if($value['vstatus']=="APPROVED"){
+                        echo'
+                        <tr style="color:yellow">
+                            <td scope="col" align="left">'. $sn .'</td>
+                            <td scope="col" align="left">'. $value["site"] .'</td>
+                            <td scope="col" align="right"> =N= '. number_format($value["amount"]) .'</td>
+                            <td scope="col" align="left">'. $value["vstatus"] .'</td>
+                            <td scope="col"><a href='. URL ."svfeedback/query/". $value["id"] .'><input type="button" value="Send Query"></a></td>;
+                        </tr>';
+
+                    }
+                    
+                   
+
+                    
                     $sn++;
                 }
-                 
+                */
                 ?>
-                
-                
-            </tbody>
+                </tbody>
+                </table>
+            </div>
+                 
 
-         </table>
-
-
-
+            </div>
         </div>
     </div>
-                                     
-    
-
-    <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );    
-  </script>
 
