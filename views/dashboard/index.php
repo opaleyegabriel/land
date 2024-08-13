@@ -782,6 +782,7 @@ session::set('adon',false);
                                                 <input type="number" id="amount" min="2000" name="amount" class="with-border" value="" placeholder="Amount to Pay">
                                                 <Div>Pay With Paystack</Div>
                                                  <input type="checkbox" name="usepaystack2" value="Pay With PayStack" checked>
+                                                 <img src="'. URL .'public/images/paystack-2.svg"/>
                                                  <input type="submit" id="" class="with-border" value="Pay Now"">
 
                                                  </div>

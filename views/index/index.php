@@ -21,6 +21,24 @@ session::init();
             background-color: #f0f2f5;
         }
     </style>
+    <style>
+        .notice {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF4500; /* Orange-red color */
+            background-color: #FFFFE0; /* Light yellow background */
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
     <div class="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
         <div class="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
 
@@ -28,9 +46,15 @@ session::init();
                 <img src="<?php echo URL; ?>public/images/logo.png" alt="" class="lg:mx-0 lg:w-52 mx-auto w-40"><p style="size: 0.6em;">Contacts: 08034453549,08089476419</p>
                 <?php //<div class="card-media h-28" id="demodiv">Peace City II and III Special  PROMO ends in <p id="demo"></p></div>;?>
                 <p class="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl"> Simplest way to acquire property</p>
+                <div class="notice">
+                    Enjoy hassle-free payments with Paystack now that all transaction fees have been waived—try it out today!
+                </div>    
+            
+            
             </div>
             <div class="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
               <div class="p-6 space-y-4 relative bg-white shadow-lg rounded-lg">
+
                 <div class="jqueryresponse3">
                   Phone Number does not exist
                 </div>
