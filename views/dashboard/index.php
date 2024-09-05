@@ -493,7 +493,7 @@ session::set('adon',false);
 
                                 <input type="hidden" value='. $id .' name="pid">
 
-                                <input type="checkbox" name="usepaystack" value="Pay With PayStack" checked><label>Pay With Paystack</label>
+                                <input type="checkbox" name="usepaystack" value="Pay With PayStack" checked><div>Pay With Paystack</div>
 
                                 <input type="submit" value="Buy">
 
@@ -779,7 +779,7 @@ session::set('adon',false);
                                               if($newendmonth > $today){
 
                                                 echo  '<div class="pt-3 align items-center" d-flex >
-                                                <input type="number" id="amount" min="2000" name="amount" class="with-border" value="" placeholder="Amount to Pay">
+                                                <input type="number" id="amount" min="500" name="amount" class="with-border" value="" placeholder="Amount to Pay">
                                                 <Div>Pay With Paystack</Div>
                                                  <input type="checkbox" name="usepaystack2" value="Pay With PayStack" checked>
                                                  <img src="'. URL .'public/images/paystack-2.svg"/>

@@ -31,6 +31,7 @@ class Dashboard extends Controller{
             $this->view->render('dashboard/index');
 
         }
+
         public function amountpaid($lngorderno){
        // print_r($lngorderno);
           $this->view->amountpaid=$this->model->amountpaid($lngorderno);
